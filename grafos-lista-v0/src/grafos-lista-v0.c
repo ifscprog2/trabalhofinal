@@ -29,7 +29,7 @@
 
 int main(void) {
 
-	//teste git
+	//teste git 2
 	 
 	grafo_t *grafo;
 	vertice_t* vertice;
