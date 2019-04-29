@@ -29,6 +29,8 @@
 
 int main(void) {
 
+	//teste git
+	 
 	grafo_t *grafo;
 	vertice_t* vertice;
 
@@ -80,7 +82,7 @@ int main(void) {
 
 
 
-        // constrói grafo
+        // constrÃ³i grafo
 	while (!fila_vazia(fila))	{
 		vertice = dequeue(fila);
 		id = vertice_get_id(vertice);
