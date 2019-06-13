@@ -19,6 +19,8 @@
 #include "vertice.h"
 #include "../lista_enc/lista_enc.h"
 
+
+
 struct vertices {
 	int id;                /*!< Identificação numérica do vértice  */
 	lista_enc_t *arestas;  /*!< Listas encadeada das arestas pertencentes ao vértice  */
@@ -27,6 +29,9 @@ struct vertices {
 	int id_grupo;
 	vertice_t* pai;
 
+	int distancia;   /*<Busca em largura*/
+
+	int visitado;  /*Busca em Profundidade*/
 };
 
 struct arestas {
@@ -58,6 +63,7 @@ vertice_t *cria_vertice(int id)
 	p->arestas = cria_lista_enc();
 	p->id_grupo = -1;
 	p->pai = NULL;
+	p->distancia = 0;
 
 	return p;
 }
@@ -140,6 +146,29 @@ lista_enc_t *vertice_get_arestas(vertice_t *vertice)
 
 	return vertice->arestas;
 }
+
+
+
+
+/**
+  * @brief  Obtém a lista encadadeada de arestas: útil para obter todos vértices adjacentes
+  * @param	vertice: ponteiro do vértice
+  *
+  * @retval int: retorna a distancia do vertice
+  */
+int vertice_get_distancia(vertice_t *vertice)
+{
+	if (vertice == NULL){
+		fprintf(stderr, "vertice_get_distancia: vertice invalido\n");
+		exit(EXIT_FAILURE);
+	}
+
+	return vertice->distancia;
+}
+
+
+
+
 
 /**
   * @brief  Obtém o peso se uma aresta
@@ -254,6 +283,33 @@ void vertice_set_grupo(vertice_t *vertice, int grupo) {
 	vertice->id_grupo = grupo;
 }
 
+
+
+/**
+  * @brief  Altera a propriedade grupo de um vértice
+  * @param	vertice: vértice em questão
+  * @param  grupo: novo grupo
+  *
+  * @retval Nenhum
+  */
+void vertice_set_visitado(vertice_t *vertice, int visitado) {
+
+	if (vertice == NULL){
+			fprintf(stderr, "vertice_set_grupo: vertice invalido\n");
+			exit(EXIT_FAILURE);
+	}
+
+	vertice->visitado = visitado;
+}
+
+
+
+
+
+
+
+
+
 /**
   * @brief  Obtém a propriedade grupo de um vértice
   * @param	vertice: vértice em questão
@@ -269,6 +325,43 @@ int vertice_get_grupo(vertice_t *vertice) {
 
 	return vertice->id_grupo;
 }
+
+
+/**
+  * @brief  Obtém a propriedade visitado de um vértice
+  * @param	vertice: vértice em questão
+  *
+  * @retval int: grupo da aresta
+  */
+int vertice_get_visitado(vertice_t *vertice) {
+
+	if (vertice == NULL){
+			fprintf(stderr, "vertice_get_grupo: vertice invalido\n");
+			exit(EXIT_FAILURE);
+	}
+
+	return vertice->visitado;
+}
+
+
+/**
+  * @brief  Obtém a propriedade fonte de um vértice
+  * @param	vertice: vértice em questão
+  *
+  * @retval int: grupo da aresta
+  */
+vertice_t* vertice_get_pai(vertice_t *vertice) {
+
+	if (vertice == NULL){
+			fprintf(stderr, "vertice_get_grupo: vertice invalido\n");
+			exit(EXIT_FAILURE);
+	}
+
+	return vertice->pai;
+}
+
+
+
 /**
   * @brief  Altera a propriedade pai de um vértice
   * @param	vertice: vértice em questão
@@ -286,3 +379,24 @@ void vertice_set_pai(vertice_t *vertice, vertice_t *pai) {
 	vertice->pai = pai;
 }
 
+
+
+
+
+
+/**
+  * @brief  Altera a propriedade distancia de um vértice
+  * @param	vertice: vértice em questão
+  * @param  distancia: distancia entre vertice fonte
+  *
+  * @retval Nenhum
+  */
+void vertice_set_distancia(vertice_t *vertice, int dist) {
+
+	if (vertice == NULL){
+			fprintf(stderr, "vertice_set_distancia: vertice invalido\n");
+			exit(EXIT_FAILURE);
+	}
+
+	vertice->distancia = dist;
+}

@@ -61,4 +61,7 @@ void bfs(grafo_t *grafo, vertice_t* inicial);
 
 void dfs(grafo_t *grafo, vertice_t* inicial);
 
+void delay(unsigned int milliseconds);
+
+
 #endif /* GRAFO_GRAFO_H_ */

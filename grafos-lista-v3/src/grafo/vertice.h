@@ -32,6 +32,9 @@ arestas_t *cria_aresta(vertice_t *fonte, vertice_t *destino, int peso);
 /* Obtem id de um vertice */
 int vertice_get_id(vertice_t *vertice);
 
+/* Obtem distancia de um vertice */
+int vertice_get_distancia(vertice_t *vertice);
+
 /* Adiciona uma aresta a um grafo */
 void adiciona_aresta(vertice_t *vertice, arestas_t *aresta);
 
@@ -58,6 +61,10 @@ status_aresta_t aresta_get_status (arestas_t *aresta);
  * Ver: struct vertices */
 void vertice_set_grupo(vertice_t *vertice, int grupo);
 
+/* Configura membro distancia da struct vertice
+ * Ver: struct vertices */
+void vertice_set_distancia(vertice_t *vertice, int distancia);
+
 /* Configura membro pai da struct vertice
  * Ver: struct vertices */
 void vertice_set_pai(vertice_t *vertice, vertice_t *pai);
@@ -66,5 +73,24 @@ void vertice_set_pai(vertice_t *vertice, vertice_t *pai);
 /* Obtem membro id_grupo da struct vertice
  * Ver: struct vertices */
 int vertice_get_grupo(vertice_t *vertice);
+
+
+/* Configura membro visitado da struct vertice */
+void vertice_set_visitado(vertice_t *vertice, int visitado);
+
+
+/* Obtem membro id_grupo da struct vertice
+ * Ver: struct vertices */
+int vertice_get_visitado(vertice_t *vertice);
+
+/* Obtem membro fonte_grupo da struct vertice
+ * Ver: struct vertices */
+vertice_t* vertice_get_pai(vertice_t *vertice);
+
+
+
+
+
+
 
 #endif /* GRAFO_VERTICE_H_ */
