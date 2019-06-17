@@ -1,0 +1,54 @@
+11:46:46 **** Incremental Build of configuration Debug for project grafos-lista-v3 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\grafos-lista-v3.o" "..\\src\\grafos-lista-v3.c" 
+..\src\grafos-lista-v3.c: In function 'main':
+..\src\grafos-lista-v3.c:39:6: warning: implicit declaration of function 'le_vertices_arquivo' [-Wimplicit-function-declaration]
+      le_vertices_arquivo("verticess.txt");
+      ^~~~~~~~~~~~~~~~~~~
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\ariane.o" "..\\src\\ariane.c" 
+gcc -o grafos-lista-v3.exe "src\\ariane.o" "src\\fila\\fila.o" "src\\grafo\\grafo.o" "src\\grafo\\vertice.o" "src\\grafos-lista-v3.o" "src\\lista_enc\\lista_enc.o" "src\\lista_enc\\no.o" "src\\pilha\\pilha.o" 
+Info: Nothing to build for grafos-lista-v3
+11:46:59 **** Incremental Build of configuration Debug for project grafos-lista-v3 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\grafos-lista-v3.o" "..\\src\\grafos-lista-v3.c" 
+..\src\grafos-lista-v3.c: In function 'main':
+..\src\grafos-lista-v3.c:39:6: warning: implicit declaration of function 'le_vertices_arquivo' [-Wimplicit-function-declaration]
+      le_vertices_arquivo("vertices.txt");
+      ^~~~~~~~~~~~~~~~~~~
+gcc -o grafos-lista-v3.exe "src\\ariane.o" "src\\fila\\fila.o" "src\\grafo\\grafo.o" "src\\grafo\\vertice.o" "src\\grafos-lista-v3.o" "src\\lista_enc\\lista_enc.o" "src\\lista_enc\\no.o" "src\\pilha\\pilha.o" 
+11:47:45 **** Incremental Build of configuration Debug for project grafos-lista-v3 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\grafos-lista-v3.o" "..\\src\\grafos-lista-v3.c" 
+..\src\grafos-lista-v3.c: In function 'main':
+..\src\grafos-lista-v3.c:34:2: warning: implicit declaration of function 'le_vertices_arquivo' [-Wimplicit-function-declaration]
+  le_vertices_arquivo("vertices.txt");
+  ^~~~~~~~~~~~~~~~~~~
+gcc -o grafos-lista-v3.exe "src\\ariane.o" "src\\fila\\fila.o" "src\\grafo\\grafo.o" "src\\grafo\\vertice.o" "src\\grafos-lista-v3.o" "src\\lista_enc\\lista_enc.o" "src\\lista_enc\\no.o" "src\\pilha\\pilha.o" 
+11:55:25 **** Incremental Build of configuration Debug for project grafos-lista-v3 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\ariane.o" "..\\src\\ariane.c" 
+..\src\ariane.c: In function 'le_vertices_arquivo':
+..\src\ariane.c:60:24: error: dereferencing pointer to incomplete type 'vertice_t {aka struct vertices}'
+             if (vertice->id==696)
+                        ^~
+11:56:32 **** Incremental Build of configuration Debug for project grafos-lista-v3 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\ariane.o" "..\\src\\ariane.c" 
+gcc -o grafos-lista-v3.exe "src\\ariane.o" "src\\fila\\fila.o" "src\\grafo\\grafo.o" "src\\grafo\\vertice.o" "src\\grafos-lista-v3.o" "src\\lista_enc\\lista_enc.o" "src\\lista_enc\\no.o" "src\\pilha\\pilha.o" 
+11:59:03 **** Incremental Build of configuration Debug for project grafos-lista-v3 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\grafo\\grafo.o" "..\\src\\grafo\\grafo.c" 
+gcc -o grafos-lista-v3.exe "src\\ariane.o" "src\\fila\\fila.o" "src\\grafo\\grafo.o" "src\\grafo\\vertice.o" "src\\grafos-lista-v3.o" "src\\lista_enc\\lista_enc.o" "src\\lista_enc\\no.o" "src\\pilha\\pilha.o" 
+12:01:33 **** Incremental Build of configuration Debug for project grafos-lista-v3 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\ariane.o" "..\\src\\ariane.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\grafo\\grafo.o" "..\\src\\grafo\\grafo.c" 
+gcc -o grafos-lista-v3.exe "src\\ariane.o" "src\\fila\\fila.o" "src\\grafo\\grafo.o" "src\\grafo\\vertice.o" "src\\grafos-lista-v3.o" "src\\lista_enc\\lista_enc.o" "src\\lista_enc\\no.o" "src\\pilha\\pilha.o" 
+12:10:49 **** Incremental Build of configuration Debug for project grafos-lista-v3 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\ariane.o" "..\\src\\ariane.c" 
+gcc -o grafos-lista-v3.exe "src\\ariane.o" "src\\fila\\fila.o" "src\\grafo\\grafo.o" "src\\grafo\\vertice.o" "src\\grafos-lista-v3.o" "src\\lista_enc\\lista_enc.o" "src\\lista_enc\\no.o" "src\\pilha\\pilha.o" 
+12:11:34 **** Incremental Build of configuration Debug for project grafos-lista-v3 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\ariane.o" "..\\src\\ariane.c" 
+gcc -o grafos-lista-v3.exe "src\\ariane.o" "src\\fila\\fila.o" "src\\grafo\\grafo.o" "src\\grafo\\vertice.o" "src\\grafos-lista-v3.o" "src\\lista_enc\\lista_enc.o" "src\\lista_enc\\no.o" "src\\pilha\\pilha.o" 

@@ -63,5 +63,8 @@ void dfs(grafo_t *grafo, vertice_t* inicial);
 
 void delay(unsigned int milliseconds);
 
+void imprime_vertices(grafo_t* grafo);
+
+
 
 #endif /* GRAFO_GRAFO_H_ */

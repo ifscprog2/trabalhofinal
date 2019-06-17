@@ -446,3 +446,27 @@ void delay(unsigned int milliseconds) {
 		;
 }
 
+
+
+void imprime_vertices(grafo_t* grafo)
+{
+
+	vertice_t* vertice;
+
+	if (grafo == NULL)
+    {
+        fprintf(stderr, "imprime_vertices: grafo invalido\n");
+        exit(EXIT_FAILURE);
+    }
+
+    no_t* no= obter_cabeca(grafo->vertices);
+
+    printf("\nImprimindo id dos vértices do grafo:\n");
+    while(no)
+    {
+    	vertice = obter_dado(no);
+    	printf("\nid vertice: %d", vertice_get_id(vertice));
+        no = obtem_proximo(no);
+
+    }
+}
