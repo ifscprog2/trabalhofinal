@@ -27,6 +27,7 @@
 
 #define FALSE 0
 #define TRUE 1
+#define INFINITO_BELL 65535
 
 //#define DEBUG
 
@@ -470,3 +471,64 @@ void imprime_vertices(grafo_t* grafo)
 
     }
 }
+
+
+
+/**
+ * @brief  Implementação de Bellman-Ford para um grafo representado por matriz de adjacência
+ * @param	grafo: um grafo
+ * @param  fonte: vértice fonte utilizando em Bellman-Ford
+ *
+ * @retval Nenhum. Predecessor e distância são adicionados em cada vértice
+ */
+
+void bellman_ford(grafo_t *grafo, int fonte) {
+
+	puts("Inicio de Bellman-Ford");
+
+	int v, w, nova_distancia, i;
+	no_t *meu_no, *aresta_no, *vertice_no;
+	vertice_t *meu_vertice;
+
+
+    vertice_no = obter_cabeca(grafo->vertices);
+	while (meu_no){
+		vertice_set_dist(obter_dado(meu_no), INFINITO_BELL);
+		vertice_set_predec(obter_dado(meu_no), -1);
+        vertice_no = obtem_proximo(vertice_no);
+	}
+
+//	grafo->vertices[fonte].distancia = 0;
+    vertice_set_dist(procura_vertice(grafo, fonte), 0);
+
+	for (i = 1; i <= obter_tamanho(grafo->vertices); i++) {
+        vertice_no = obter_cabeca(grafo->vertices);
+		do(vertice_no){
+
+			//meu_no = obter_cabeca(vertice_get_arestas(obter_dado(obter_cabeca(grafo->vertices))));
+			aresta_no = obter_cabeca()
+			while (aresta_no){
+				nova_distancia = vertice_get_dist(procura_vertice(grafo,v)) + aresta_get_peso(obter_dado(meu_no));
+				if (vertice_get_dist(aresta_get_destino(obter_dado(meu_no))) > nova_distancia){
+					vertice_set_dist(aresta_get_destino(obter_dado(meu_no)),nova_distancia);
+					vertice_set_predec(procura_vertice(grafo,v),)
+					printf("%d\t",nova_distancia);
+				}
+
+
+
+				aresta_no = obtem_proximo(aresta_no);
+
+
+			}
+			vertice_no = obtem_proximo(vertice_no);
+		}
+
+	}
+
+//	imprime_dados_vertice(grafo);
+
+}
+
+
+

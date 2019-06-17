@@ -26,5 +26,14 @@ void imprimi_lista_tras (lista_enc_t *lista);
  * no_removido é liberado da memoória  */
 void *remover_no(lista_enc_t *lista, no_t *no_removido);
 
+/**
+  * @brief  Obtém tamanho da lista encadeada.
+  * @param	lista: lista que se deseja obter a cauda
+  *
+  * @retval int *: tamanho da lista.
+  */
+int obter_tamanho(lista_enc_t *lista);
+
+
 
 #endif // LISTA_ENC_H_INCLUDED

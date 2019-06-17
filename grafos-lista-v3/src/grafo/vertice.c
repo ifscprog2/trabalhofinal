@@ -28,10 +28,11 @@ struct vertices {
 	/* Informações para componentes conexos */
 	int id_grupo;
 	vertice_t* pai;
-
-	int distancia;   /*<Busca em largura*/
-
 	int visitado;  /*Busca em Profundidade*/
+	int distancia;   /*<Busca em largura*/
+    int dist;       /*bellman-ford*/
+	int predec;     /*bellman-ford*/
+
 };
 
 struct arestas {
@@ -184,6 +185,24 @@ int aresta_get_peso (arestas_t *aresta) {
 
 	return aresta->peso;
 }
+
+
+
+/**
+  * @brief  Obtém o destino de uma aresta
+  * @param	aresta: ponteiro da aresta
+  *
+  * @retval vertice_t: destino da aresta
+  */
+vertice_t *aresta_get_destino (arestas_t *aresta) {
+	if (aresta == NULL){
+		fprintf(stderr, "aresta_get_peso: aresta invalido\n");
+		exit(EXIT_FAILURE);
+	}
+
+	return aresta->dest;
+}
+
 
 /**
   * @brief  Obtém o vértice adjacente de um aresta
@@ -361,6 +380,38 @@ vertice_t* vertice_get_pai(vertice_t *vertice) {
 }
 
 
+/**
+  * @brief  Obtém a propriedade dist de um vértice
+  * @param	vertice: vértice em questão
+  *
+  * @retval int: dist da aresta
+  */
+int vertice_get_dist(vertice_t *vertice) {
+
+	if (vertice == NULL){
+			fprintf(stderr, "vertice_get_grupo: vertice invalido\n");
+			exit(EXIT_FAILURE);
+	}
+
+	return vertice->dist;
+}
+
+
+/**
+  * @brief  Obtém a propriedade predec de um vértice
+  * @param	vertice: vértice em questão
+  *
+  * @retval int: predec da aresta
+  */
+vertice_t* vertice_get_predec(vertice_t *vertice) {
+
+	if (vertice == NULL){
+			fprintf(stderr, "vertice_get_grupo: vertice invalido\n");
+			exit(EXIT_FAILURE);
+	}
+
+	return vertice->predec;
+}
 
 /**
   * @brief  Altera a propriedade pai de um vértice
@@ -399,4 +450,42 @@ void vertice_set_distancia(vertice_t *vertice, int dist) {
 	}
 
 	vertice->distancia = dist;
+}
+
+
+
+/**
+  * @brief  Altera a propriedade dist de um vértice
+  * @param	vertice: vértice em questão
+  * @param  distancia: dist entre vertice fonte
+  *
+  * @retval Nenhum
+  */
+void vertice_set_dist(vertice_t *vertice, int dist) {
+
+	if (vertice == NULL){
+			fprintf(stderr, "vertice_set_distancia: vertice invalido\n");
+			exit(EXIT_FAILURE);
+	}
+
+	vertice->dist = dist;
+}
+
+
+
+/**
+  * @brief  Altera a propriedade predec de um vértice
+  * @param	vertice: vértice em questão
+  * @param  distancia: predec entre vertice fonte
+  *
+  * @retval Nenhum
+  */
+void vertice_set_predec(vertice_t *vertice, int predec) {
+
+	if (vertice == NULL){
+			fprintf(stderr, "vertice_set_distancia: vertice invalido\n");
+			exit(EXIT_FAILURE);
+	}
+
+	vertice->predec = predec;
 }

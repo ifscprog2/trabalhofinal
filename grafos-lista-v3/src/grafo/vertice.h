@@ -57,6 +57,11 @@ void aresta_set_status(arestas_t *aresta, status_aresta_t status);
 status_aresta_t aresta_get_status (arestas_t *aresta);
 
 
+/* Obtem o destino de uma aresta */
+vertice_t* aresta_get_destino (arestas_t *aresta);
+
+
+
 /* Configura membro id_grupo da struct vertice
  * Ver: struct vertices */
 void vertice_set_grupo(vertice_t *vertice, int grupo);
@@ -68,6 +73,14 @@ void vertice_set_distancia(vertice_t *vertice, int distancia);
 /* Configura membro pai da struct vertice
  * Ver: struct vertices */
 void vertice_set_pai(vertice_t *vertice, vertice_t *pai);
+
+/* Configura membro dist da struct vertice
+ * Ver: struct vertices */
+void vertice_set_dist(vertice_t *vertice, int dist);
+
+/* Configura membro predec da struct vertice
+ * Ver: struct vertices */
+void vertice_set_predec(vertice_t *vertice, int predec);
 
 
 /* Obtem membro id_grupo da struct vertice
@@ -87,6 +100,13 @@ int vertice_get_visitado(vertice_t *vertice);
  * Ver: struct vertices */
 vertice_t* vertice_get_pai(vertice_t *vertice);
 
+/* Obtem membro dist da struct vertice
+ * Ver: struct vertices */
+int vertice_get_dist(vertice_t *vertice);
+
+/* Obtem membro predec da struct vertice
+ * Ver: struct vertices */
+vertice_t* vertice_get_predec(vertice_t *vertice);
 
 
 
