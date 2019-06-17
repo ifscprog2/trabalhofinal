@@ -1,7 +1,0 @@
-12:11:34 **** Incremental Build of configuration Debug for project grafos-lista-v3 ****
-Info: Internal Builder is used for build
-gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\ariane.o" "..\\src\\ariane.c" 
-gcc -o grafos-lista-v3.exe "src\\ariane.o" "src\\fila\\fila.o" "src\\grafo\\grafo.o" "src\\grafo\\vertice.o" "src\\grafos-lista-v3.o" "src\\lista_enc\\lista_enc.o" "src\\lista_enc\\no.o" "src\\pilha\\pilha.o" 
-
-12:11:37 Build Finished (took 3s.288ms)
-
