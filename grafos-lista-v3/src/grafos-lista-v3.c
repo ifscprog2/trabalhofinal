@@ -3,7 +3,7 @@
  Name        : grafos-lista-v0.c
  Author      : ednei
  Version     :
- Copyright   : Your copyright notice
+ Copyright   : Your copyright notice: juca
  Description : Hello World in C, Ansi-style
  ============================================================================
  */
