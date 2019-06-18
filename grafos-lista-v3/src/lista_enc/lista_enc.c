@@ -180,6 +180,26 @@ no_t *obter_cauda(lista_enc_t *lista){
 	return lista->cauda;
 }
 
+
+
+
+/**
+  * @brief  Obtém tamanho da lista encadeada.
+  * @param	lista: lista que se deseja obter a cauda
+  *
+  * @retval int *: tamanho da lista.
+  */
+int obter_tamanho(lista_enc_t *lista){
+
+	if (lista == NULL){
+		fprintf(stderr,"obter_cabeca: ponteiros invalidos");
+		exit(EXIT_FAILURE);
+	}
+
+	return lista->tamanho;
+}
+
+
 /**
   * @brief  Remove um dado do final (cauda) da lista encadeada.
   * @param	lista: lista que se deseja remover da cauda
