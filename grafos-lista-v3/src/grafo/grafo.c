@@ -484,7 +484,7 @@ void imprime_vertices(grafo_t* grafo)
 
 void bellman_ford(grafo_t *grafo, int fonte) {
 
-	puts("Inicio de Bellman-Ford");
+/*	puts("Inicio de Bellman-Ford");
 
 	int v, w, nova_distancia, i;
 	no_t *meu_no, *aresta_no, *vertice_no;
@@ -527,7 +527,7 @@ void bellman_ford(grafo_t *grafo, int fonte) {
 	}
 
 //	imprime_dados_vertice(grafo);
-
+*/
 }
 
 

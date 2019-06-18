@@ -108,7 +108,7 @@ int main(void) {
 	bfs(grafo, vertice_inicial);
 	dfs(grafo, vertice_inicial);
 
-	bellman_ford(grafo,1);
+	//bellman_ford(grafo,1);
 
 	//fflush(stdout);
 	exportar_grafo_dot("grafo.dot", grafo);
