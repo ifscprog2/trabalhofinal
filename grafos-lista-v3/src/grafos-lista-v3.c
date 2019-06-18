@@ -116,7 +116,7 @@ int main(void) {
 	libera_fila(fila);
 	libera_grafo(grafo);
 
-	printf("fim progr v03");
+	printf("fim progr v_ariane");
 
 	return EXIT_SUCCESS;
 }
