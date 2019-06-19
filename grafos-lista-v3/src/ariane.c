@@ -44,9 +44,6 @@ grafo_t* le_vertices_arquivo(const char* filename) {
 
 	}
 
-	//fflush(stdout);
-	//imprime_vertices(grafo);
-
 	rewind(fp);
 	while (fgets(buffer, 100, fp) != NULL) {
 		memcpy(buffer_temp, buffer, 12);
@@ -61,29 +58,31 @@ grafo_t* le_vertices_arquivo(const char* filename) {
 			while (fgets(buffer, 100, fp) != NULL) {
 
 				memcpy(buffer_temp, buffer, 12);
+				if (memcmp("------------", buffer_temp, 12) == 0)
+									break;
 
 				//se for aresta
-				if (memcmp("Ídice......", buffer_temp, 12) == 0) {
+				if (memcmp("Índice......", buffer_temp, 12) == 0) {
 
 					memset(num_no, '\0', 4); //seta a string com o numero do no(vertice) com null em todas posições
 					strncpy(num_no, &buffer[35], 3); //copia do buffer o trecho que tem o numero do no
 					id_vertice_destino = atoi(num_no); //converte de char para int
 
-					adiciona_adjacentes(grafo, procura_vertice(grafo,id_vertice_fonte), 2, id_vertice_destino, 1);
-
-
+					if (!procurar_adjacente(procura_vertice(grafo, id_vertice_fonte),procura_vertice(grafo, id_vertice_destino)))
+							adiciona_adjacentes(grafo,
+									procura_vertice(grafo, id_vertice_fonte), 2,
+									id_vertice_destino, 1);
 
 
 
 				}
 
-
 			}
-
 
 		}
 
 	}
+	imprime_vertices(grafo);
 
 	return grafo;
 

@@ -32,7 +32,7 @@ int main(void) {
 
 	grafo_t *grafo, *grafo1;
 
-printf("Hello world!\n");
+	printf("Hello world!\n");
 	grafo1 = le_vertices_arquivo("vertices.txt");
 
 	exportar_grafo_dot("grafo1.dot", grafo1);

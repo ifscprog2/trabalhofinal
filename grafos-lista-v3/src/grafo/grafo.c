@@ -329,10 +329,10 @@ void exportar_grafo_dot(const char *filename, grafo_t *grafo) {
 		exit(EXIT_FAILURE);
 	}
 
-	fprintf(file, "graph {\n");
+	fprintf(file, "digraph G{\n");
 
 #ifdef DEBUG
-	printf("graph {\n");
+	printf("digraph G{\n");
 #endif // DEBUG
 
 //obtem todos os nos da lista
@@ -358,17 +358,17 @@ void exportar_grafo_dot(const char *filename, grafo_t *grafo) {
 			adjacente = aresta_get_adjacente(aresta);
 
 			//marca contra-aresta também como exporta no caso de grafo não direcionados
-			contra_aresta = procurar_adjacente(adjacente, vertice);
-			aresta_set_status(contra_aresta, EXPORTADA);
+			//contra_aresta = procurar_adjacente(adjacente, vertice);
+			//aresta_set_status(contra_aresta, EXPORTADA);
 
 			//obtem peso
 			peso = aresta_get_peso(aresta);
 
-			fprintf(file, "\t%d -- %d [label = %d];\n", vertice_get_id(vertice),
+			fprintf(file, "\t%d -> %d [label = %d];\n", vertice_get_id(vertice),
 					vertice_get_id(adjacente), peso);
 
 #ifdef DEBUG
-			printf("\t%d -- %d [label = %d];\n", vertice_get_id(vertice),
+			printf("\t%d -> %d [label = %d];\n", vertice_get_id(vertice),
 					vertice_get_id(adjacente), peso);
 
 #endif // DEBUG
@@ -462,7 +462,7 @@ void imprime_vertices(grafo_t* grafo) {
 	printf("\nImprimindo id dos vértices do grafo:\n");
 	while (no) {
 		vertice = obter_dado(no);
-		printf("\nid vertice: %d", vertice_get_id(vertice));
+		printf("\n\nid vertice: %d", vertice_get_id(vertice));
 
 		no_t* no_aresta = obter_cabeca(vertice_get_arestas(vertice));
 		while (no_aresta) {
