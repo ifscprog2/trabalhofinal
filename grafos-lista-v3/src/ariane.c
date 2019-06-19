@@ -5,66 +5,86 @@
 
 #include "grafo/grafo.h"
 
+grafo_t* le_vertices_arquivo(const char* filename) {
+	setlocale(LC_CTYPE, "");
 
-grafo_t* le_vertices_arquivo(const char* filename)
-{
-    setlocale(LC_CTYPE, "");
+	if (filename == NULL) {
+		fprintf(stderr, "le_vertices_arquivo: ponteiro invalido\n");
+		exit(EXIT_FAILURE);
+	}
 
-    if(filename==NULL)
-    {
-        fprintf(stderr, "le_vertices_arquivo: ponteiro invalido\n");
-        exit(EXIT_FAILURE);
-    }
+	FILE* fp = fopen(filename, "r");
 
-    FILE* fp = fopen(filename, "r");
+	if (fp == NULL) {
+		fprintf(stderr, "le_vertices_arquivo: Arquivo não encontrado\n");
+		exit(EXIT_FAILURE);
+	}
 
-    if(fp==NULL)
-        {
-            fprintf(stderr, "le_vertices_arquivo: Arquivo não encontrado\n");
-            exit(EXIT_FAILURE);
-        }
+	char buffer_temp[12]; //buffer para comparar com buffer_compara
+	char buffer[100]; //buffer pra ler o arquivo para fazer o while
+	char num_no[4]; //string com o id do vértice que está sendo lido
+	int id_vertice_destino, id_vertice_fonte, dist; //vetor com os ids de todos vertices
+
+	grafo_t* grafo = cria_grafo(1);
+
+	rewind(fp);
+	while (fgets(buffer, 100, fp) != NULL) {
+		memcpy(buffer_temp, buffer, 12);
+
+		//se for a linha com o numero do no o if é executado
+		if (memcmp("Número do Nó", buffer_temp, 12) == 0) {
+
+			memset(num_no, '\0', 4); //seta a string com o numero do no(vertice) com null em todas posições
+			strncpy(num_no, &buffer[41], 3); //copia do buffer o trecho que tem o numero do no
+			id_vertice_fonte = atoi(num_no); //converte de char para int
+
+			grafo_adicionar_vertice(grafo, id_vertice_fonte);
+
+		}
+
+	}
+
+	//fflush(stdout);
+	//imprime_vertices(grafo);
+
+	rewind(fp);
+	while (fgets(buffer, 100, fp) != NULL) {
+		memcpy(buffer_temp, buffer, 12);
+
+		//se for a linha com o numero do no o if é executado
+		if (memcmp("Número do Nó", buffer_temp, 12) == 0) {
+
+			memset(num_no, '\0', 4); //seta a string com o numero do no(vertice) com null em todas posições
+			strncpy(num_no, &buffer[41], 3); //copia do buffer o trecho que tem o numero do no
+			id_vertice_fonte = atoi(num_no); //converte de char para int
+
+			while (fgets(buffer, 100, fp) != NULL) {
+
+				memcpy(buffer_temp, buffer, 12);
+
+				//se for aresta
+				if (memcmp("Ídice......", buffer_temp, 12) == 0) {
+
+					memset(num_no, '\0', 4); //seta a string com o numero do no(vertice) com null em todas posições
+					strncpy(num_no, &buffer[35], 3); //copia do buffer o trecho que tem o numero do no
+					id_vertice_destino = atoi(num_no); //converte de char para int
+
+					adiciona_adjacentes(grafo, procura_vertice(grafo,id_vertice_fonte), 2, id_vertice_destino, 1);
 
 
-    char buffer_compara[12]; //armazena a string Número do nó para fazer a busca
-    char buffer_temp[12];//buffer para comparar com buffer_compara
-    char buffer[100];//buffer pra ler o arquivo para fazer o while
-    char num_no[4];//string com o id do vértice que está sendo lido
-    int id_vertice; //vetor com os ids de todos vertices
 
 
-    grafo_t* grafo = cria_grafo(1);
-    vertice_t* vertice;
 
-    fread(buffer_compara,sizeof(char), 12, fp);
-
-    rewind(fp);
-
-    while(fgets(buffer,100,fp)!=NULL)
-    {
-        memcpy(buffer_temp,buffer,12);
-
-        //se for a linha com o numero do no o if é executado
-        if(memcmp(buffer_compara,buffer_temp,sizeof(buffer_compara))==0)
-        {
-
-            memset(num_no,'\0',4); //seta a string com o numero do no(vertice) com null em todas posições
-            strncpy(num_no,&buffer[41],3); //copia do buffer o trecho que tem o numero do no
-            id_vertice = atoi(num_no);//converte de char para int
-
-            //  printf("\n id_vertice = %d  no= %s", id_vertice[k],num_no);
-
-            vertice= grafo_adicionar_vertice(grafo,id_vertice);
-            printf("\nAdcionando vertice:");
-            printf("\nid= %d\n", vertice_get_id(vertice));
+				}
 
 
-        }
+			}
 
-    }
-       //printf("k= %d",k); //numero de vertices
-    fflush(stdout);
-    imprime_vertices(grafo);
 
-    return grafo ;
+		}
+
+	}
+
+	return grafo;
 
 }

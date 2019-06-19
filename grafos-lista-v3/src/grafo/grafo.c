@@ -29,7 +29,7 @@
 #define TRUE 1
 #define INFINITO_BELL 65535
 
-//#define DEBUG
+#define DEBUG_BELL
 
 #define INFINITO INT_MAX
 
@@ -47,7 +47,7 @@ struct grafos {
  */
 void bfs(grafo_t *grafo, vertice_t* vertice_inicial) {
 
-	printf("Iniciando bfs\n");
+	printf("\nIniciando bfs\n");
 
 	fila_t *Q = cria_fila();
 
@@ -107,7 +107,7 @@ void dfs(grafo_t *grafo, vertice_t* vertice_inicial) {
 
 	vertice_t *v;
 
-	printf("Iniciando dfs\n");
+	printf("\nIniciando dfs\n");
 
 	pilha_t *S = cria_pilha();
 
@@ -447,32 +447,37 @@ void delay(unsigned int milliseconds) {
 		;
 }
 
-
-
-void imprime_vertices(grafo_t* grafo)
-{
+void imprime_vertices(grafo_t* grafo) {
 
 	vertice_t* vertice;
+	arestas_t* aresta;
 
-	if (grafo == NULL)
-    {
-        fprintf(stderr, "imprime_vertices: grafo invalido\n");
-        exit(EXIT_FAILURE);
-    }
+	if (grafo == NULL) {
+		fprintf(stderr, "imprime_vertices: grafo invalido\n");
+		exit(EXIT_FAILURE);
+	}
 
-    no_t* no= obter_cabeca(grafo->vertices);
+	no_t* no = obter_cabeca(grafo->vertices);
 
-    printf("\nImprimindo id dos vértices do grafo:\n");
-    while(no)
-    {
-    	vertice = obter_dado(no);
-    	printf("\nid vertice: %d", vertice_get_id(vertice));
-        no = obtem_proximo(no);
+	printf("\nImprimindo id dos vértices do grafo:\n");
+	while (no) {
+		vertice = obter_dado(no);
+		printf("\nid vertice: %d", vertice_get_id(vertice));
 
-    }
+		no_t* no_aresta = obter_cabeca(vertice_get_arestas(vertice));
+		while (no_aresta) {
+			aresta = obter_dado(no_aresta);
+			printf("\nid destino: %d", vertice_get_id(aresta_get_destino(aresta)));
+
+			no_aresta = obtem_proximo(no_aresta);
+		}
+
+
+		no = obtem_proximo(no);
+
+
+	}
 }
-
-
 
 /**
  * @brief  ImplementaÃ§Ã£o de Bellman-Ford para um grafo representado por matriz de adjacÃªncia
@@ -484,41 +489,49 @@ void imprime_vertices(grafo_t* grafo)
 
 void bellman_ford(grafo_t *grafo, int fonte) {
 
-/*	puts("Inicio de Bellman-Ford");
+	printf("Inicio de Bellman-Ford -> vertice fonte:%d", fonte);
 
-	int v, w, nova_distancia, i;
-	no_t *meu_no, *aresta_no, *vertice_no;
+	int nova_distancia, i;
+	no_t *aresta_no, *vertice_no;
 	vertice_t *meu_vertice;
 
-
-    vertice_no = obter_cabeca(grafo->vertices);
-	while (meu_no){
-		vertice_set_dist(obter_dado(meu_no), INFINITO_BELL);
-		vertice_set_predec(obter_dado(meu_no), -1);
-        vertice_no = obtem_proximo(vertice_no);
+	//inicia propriedades de todos vertices
+	vertice_no = obter_cabeca(grafo->vertices);
+	while (vertice_no) {
+		vertice_set_dist(obter_dado(vertice_no), INFINITO_BELL);
+		vertice_set_predec(obter_dado(vertice_no), -1);
+		vertice_no = obtem_proximo(vertice_no);
 	}
 
-//	grafo->vertices[fonte].distancia = 0;
-    vertice_set_dist(procura_vertice(grafo, fonte), 0);
+	//fonte.dist<-0
+	vertice_set_dist(procura_vertice(grafo, fonte), 0);
 
+	//intera |v| -1
 	for (i = 1; i <= obter_tamanho(grafo->vertices); i++) {
-        vertice_no = obter_cabeca(grafo->vertices);
-		do(vertice_no){
 
-			//meu_no = obter_cabeca(vertice_get_arestas(obter_dado(obter_cabeca(grafo->vertices))));
-			aresta_no = obter_cabeca()
-			while (aresta_no){
-				nova_distancia = vertice_get_dist(procura_vertice(grafo,v)) + aresta_get_peso(obter_dado(meu_no));
-				if (vertice_get_dist(aresta_get_destino(obter_dado(meu_no))) > nova_distancia){
-					vertice_set_dist(aresta_get_destino(obter_dado(meu_no)),nova_distancia);
-					vertice_set_predec(procura_vertice(grafo,v),)
-					printf("%d\t",nova_distancia);
+		//varre todos vertices
+		vertice_no = obter_cabeca(grafo->vertices);
+		while (vertice_no) {
+			meu_vertice = obter_dado(vertice_no);
+			aresta_no = obter_cabeca(vertice_get_arestas(meu_vertice));
+
+			//varre todas arestas do vertice em analise
+			while (aresta_no) {
+				nova_distancia = vertice_get_dist(
+						procura_vertice(grafo, vertice_get_id(meu_vertice))) //nova_dist-<w.dist +peso_aresta(v)  w=vertice->id   v=aresta->destino
+				+ aresta_get_peso(obter_dado(aresta_no));
+
+				if (vertice_get_dist(aresta_get_destino(obter_dado(aresta_no))) //if v->dist > nova_distancia
+				> nova_distancia) {
+					vertice_set_dist(aresta_get_destino(obter_dado(aresta_no)),
+							nova_distancia); // v->dist = nova_distancia
+					vertice_set_predec(
+							aresta_get_destino(obter_dado(aresta_no)),
+							vertice_get_id(meu_vertice)); //  v->predec = w->id
+
 				}
 
-
-
 				aresta_no = obtem_proximo(aresta_no);
-
 
 			}
 			vertice_no = obtem_proximo(vertice_no);
@@ -526,9 +539,17 @@ void bellman_ford(grafo_t *grafo, int fonte) {
 
 	}
 
-//	imprime_dados_vertice(grafo);
-*/
-}
+#ifdef DEBUG_BELL
+	vertice_no = obter_cabeca(grafo->vertices);
+	//varre todos vertices
+	while (vertice_no) {
+		printf("\nvertice visitado:%d\t  dist:%d", vertice_get_id(obter_dado(vertice_no)), vertice_get_dist(obter_dado(vertice_no)));
+		vertice_no = obtem_proximo(vertice_no);
+	}
+#endif // DEBUG
 
+
+
+}
 
 

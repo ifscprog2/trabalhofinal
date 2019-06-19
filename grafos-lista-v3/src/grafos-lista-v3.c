@@ -32,8 +32,10 @@ int main(void) {
 
 	grafo_t *grafo, *grafo1;
 
-	printf("Hello world!\n");
+printf("Hello world!\n");
 	grafo1 = le_vertices_arquivo("vertices.txt");
+
+	exportar_grafo_dot("grafo1.dot", grafo1);
 
 
 
@@ -108,7 +110,7 @@ int main(void) {
 	bfs(grafo, vertice_inicial);
 	dfs(grafo, vertice_inicial);
 
-	//bellman_ford(grafo,1);
+	bellman_ford(grafo,1);
 
 	//fflush(stdout);
 	exportar_grafo_dot("grafo.dot", grafo);
@@ -116,7 +118,7 @@ int main(void) {
 	libera_fila(fila);
 	libera_grafo(grafo);
 
-	printf("fim progr v_ariane");
+	printf("\nfim progr v_03\n");
 
 	return EXIT_SUCCESS;
 }
