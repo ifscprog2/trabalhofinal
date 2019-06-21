@@ -10,6 +10,7 @@
 .eqv GRID_ROWS 35       
 .eqv GRID_COLS 35
   
+
 .data
 
 # 35x35 Pacman Arena - Sprites 7x7
@@ -64,7 +65,7 @@ colors: .word BLACK, BLUE, PURPLE, YELLOW
 
 .eqv SPRITE_SIZE 49
 sprites:
-#Comida
+#Comida (0)
 .byte 0,0,0,0,0,0,0
 .byte 0,0,0,0,0,0,0
 .byte 0,0,0,6,0,0,0
@@ -72,7 +73,7 @@ sprites:
 .byte 0,0,0,6,0,0,0
 .byte 0,0,0,0,0,0,0
 .byte 0,0,0,0,0,0,0
-#Invenc.
+#Invenc. (1)
 .byte 0,0,0,0,0,0,0
 .byte 0,0,0,1,0,0,0
 .byte 0,0,1,1,1,0,0
@@ -80,7 +81,7 @@ sprites:
 .byte 0,0,1,1,1,0,0
 .byte 0,0,0,1,0,0,0
 .byte 0,0,0,0,0,0,0
-#Inimigo
+#Inimigo (2)
 .byte 0,0,0,0,0,0,0
 .byte 0,0,2,2,2,0,0
 .byte 0,2,0,2,0,2,0
@@ -88,7 +89,7 @@ sprites:
 .byte 0,2,2,2,2,2,0
 .byte 0,2,0,2,0,2,0
 .byte 0,0,0,0,0,0,0
-#PACMAN
+#PACMAN (3)
 .byte 0,0,0,0,0,0,0
 .byte 0,0,3,3,3,0,0
 .byte 0,3,3,3,3,3,0
@@ -96,7 +97,7 @@ sprites:
 .byte 0,3,3,3,3,3,0
 .byte 0,0,3,3,3,0,0
 .byte 0,0,0,0,0,0,0
-#Cereja
+#Cereja (4)
 .byte 0,0,0,0,0,0,0
 .byte 0,0,0,0,5,5,0
 .byte 0,0,0,5,5,0,0
@@ -104,7 +105,7 @@ sprites:
 .byte 0,4,4,4,0,0,0
 .byte 0,4,4,4,0,0,0
 .byte 0,0,0,0,0,0,0
-#Canto Sup. Esq.
+#Canto Sup. Esq. 
 .byte 0,0,0,0,0,0,0
 .byte 0,0,0,6,6,6,6
 .byte 0,0,6,6,6,6,6
