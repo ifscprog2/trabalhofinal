@@ -552,4 +552,3 @@ void bellman_ford(grafo_t *grafo, int fonte) {
 
 }
 
-

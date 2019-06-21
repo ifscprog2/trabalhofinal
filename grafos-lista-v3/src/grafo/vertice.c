@@ -324,11 +324,6 @@ void vertice_set_visitado(vertice_t *vertice, int visitado) {
 
 
 
-
-
-
-
-
 /**
   * @brief  Obtém a propriedade grupo de um vértice
   * @param	vertice: vértice em questão
@@ -489,3 +484,5 @@ void vertice_set_predec(vertice_t *vertice, int predec) {
 
 	vertice->predec = predec;
 }
+
+
