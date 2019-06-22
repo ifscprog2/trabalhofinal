@@ -7,13 +7,14 @@
 .eqv X_SCALE   7
 .eqv Y_SCALE   7
 
-.eqv GRID_ROWS 35       
-.eqv GRID_COLS 35
+.eqv GRID_1_ROWS 35       
+.eqv GRID_1_COLS 35
   
+
 .data
 
 # 35x35 Pacman Arena - Sprites 7x7
-grid:
+grid_1:
 .ascii "ENNNNNNGNNNGNNNGF@EGNNNGNNNGNNNNNNF"
 .ascii "IA@@@@@I@@@I@@@LK@JM@@@I@@@I@@@@@AI"
 .ascii "I@ONNP@I@Q@I@Q@I@@@I@Q@I@Q@I@ONNP@I"
@@ -64,7 +65,7 @@ colors: .word BLACK, BLUE, PURPLE, YELLOW
 
 .eqv SPRITE_SIZE 49
 sprites:
-#Comida
+#Comida (@)
 .byte 0,0,0,0,0,0,0
 .byte 0,0,0,0,0,0,0
 .byte 0,0,0,6,0,0,0
@@ -72,7 +73,7 @@ sprites:
 .byte 0,0,0,6,0,0,0
 .byte 0,0,0,0,0,0,0
 .byte 0,0,0,0,0,0,0
-#Invenc.
+#Invenc. (A)
 .byte 0,0,0,0,0,0,0
 .byte 0,0,0,1,0,0,0
 .byte 0,0,1,1,1,0,0
@@ -80,7 +81,7 @@ sprites:
 .byte 0,0,1,1,1,0,0
 .byte 0,0,0,1,0,0,0
 .byte 0,0,0,0,0,0,0
-#Inimigo
+#Inimigo (B)
 .byte 0,0,0,0,0,0,0
 .byte 0,0,2,2,2,0,0
 .byte 0,2,0,2,0,2,0
@@ -88,7 +89,7 @@ sprites:
 .byte 0,2,2,2,2,2,0
 .byte 0,2,0,2,0,2,0
 .byte 0,0,0,0,0,0,0
-#PACMAN
+#PACMAN (C)
 .byte 0,0,0,0,0,0,0
 .byte 0,0,3,3,3,0,0
 .byte 0,3,3,3,3,3,0
@@ -96,7 +97,7 @@ sprites:
 .byte 0,3,3,3,3,3,0
 .byte 0,0,3,3,3,0,0
 .byte 0,0,0,0,0,0,0
-#Cereja
+#Cereja (D)
 .byte 0,0,0,0,0,0,0
 .byte 0,0,0,0,5,5,0
 .byte 0,0,0,5,5,0,0
@@ -104,15 +105,15 @@ sprites:
 .byte 0,4,4,4,0,0,0
 .byte 0,4,4,4,0,0,0
 .byte 0,0,0,0,0,0,0
-#Canto Sup. Esq.
-.byte 0,0,0,0,0,0,0
-.byte 0,0,0,6,6,6,6
+#Canto Sup. Esq. (E)
+.byte 3,3,3,3,3,3,3
+.byte 3,3,3,6,6,6,6
 .byte 0,0,6,6,6,6,6
 .byte 0,6,6,6,6,6,6
 .byte 0,6,6,6,6,6,6
 .byte 0,6,6,6,6,6,6
 .byte 0,6,6,6,6,6,0
-#Canto Sup. Dir.
+#Canto Sup. Dir. (F)
 .byte 0,0,0,0,0,0,0
 .byte 6,6,6,6,0,0,0
 .byte 6,6,6,6,6,0,0
@@ -120,7 +121,7 @@ sprites:
 .byte 6,6,6,6,6,6,0
 .byte 6,6,6,6,6,6,0
 .byte 0,6,6,6,6,6,0
-#Tee Inferior
+#Tee Inferior   (G)
 .byte 0,0,0,0,0,0,0
 .byte 6,6,6,6,6,6,6
 .byte 6,6,6,6,6,6,6
@@ -128,7 +129,7 @@ sprites:
 .byte 6,6,6,6,6,6,6
 .byte 6,6,6,6,6,6,6
 .byte 0,6,6,6,6,6,0
-#Tee Superior
+#Tee Superior   (H)
 .byte 0,6,6,6,6,6,0
 .byte 6,6,6,6,6,6,6
 .byte 6,6,6,6,6,6,6
@@ -136,7 +137,7 @@ sprites:
 .byte 6,6,6,6,6,6,6
 .byte 6,6,6,6,6,6,6
 .byte 0,0,0,0,0,0,0
-#Parede Vertical
+#Parede Vertical  (I)
 .byte 0,6,6,6,6,6,0
 .byte 0,6,6,6,6,6,0
 .byte 0,6,6,6,6,6,0
