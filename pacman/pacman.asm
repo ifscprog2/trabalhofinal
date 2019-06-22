@@ -6,21 +6,20 @@
 .globl main
 main:
 	# CHAMA DRAW GRID
-    #$li $a0, 35
-    #li $a1, 35
-    #la $a2, grid
-    #jal draw_grid    
-    #hlt: b hlt
+    li $a0, GRID_1_COLS  
+    li $a1, GRID_1_ROWS 
+    la $a2, grid_1
+    jal draw_grid  
 
 	# TESTE DRAW SPRITE
-    li   $t8,21
-    li   $t9,0
+    li   $s0,0
+    li   $s1,0
 main2:
-    move $a0,$t8
-    move $a1,$t9
-    li   $a2,3
+    move $a0,$s0  # x
+    move $a1,$s1  # y
+    li   $a2,3    #sprite
     jal  draw_sprite
-    add $t8, $t8, 1
+    add $s0, $s0, 1
 	
 	## DELAY(50)
     li $v0, 32
