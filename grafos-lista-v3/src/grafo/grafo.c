@@ -487,7 +487,7 @@ void imprime_vertices(grafo_t* grafo) {
  * @retval Nenhum. Predecessor e distância são adicionados em cada vértice
  */
 
-void bellman_ford(grafo_t *grafo, int fonte) {
+int bellman_ford(grafo_t *grafo, int fonte) {
 
 	printf("Inicio de Bellman-Ford -> vertice fonte:%d", fonte);
 
@@ -548,6 +548,33 @@ void bellman_ford(grafo_t *grafo, int fonte) {
 	}
 #endif // DEBUG
 
+return fonte;
+
+}
+
+
+
+/**
+ * @brief  Imprime o caminho de menor distância. Execute Bellman-Ford previamente.
+ * @param	grafo: um grafo
+ * @param  fonte: vértice fonte utilizando em Bellman-Ford
+ * @param  destino: vértice destino. Deve haver pelo menos um caminho entre fonte e destino
+ *
+ * @retval Nenhum
+ */
+void imprimir_caminho(grafo_t *grafo, int destino, int fonte) {
+
+
+	puts("\nInicio imprimir caminho\n");
+	printf("caminho entre fonte:%d e destinho:%d\n ", destino, fonte);
+
+    printf("%d\t", fonte);
+	while (fonte != destino) {
+		printf(" %d\t", vertice_get_predec(procura_vertice(grafo, fonte)));
+
+		fonte = vertice_get_predec(procura_vertice(grafo, fonte));
+
+	}
 
 
 }
