@@ -1,11 +1,21 @@
 .include "graphics.inc"
 .include "funcoes.inc"
+.include "macros.inc"
+.include "interrupt.inc"
 
+
+.data
+
+animed_sprite(pacman, 3, 0,0, 0,0)#struct animed
+moviment(mov_pacman,0,0,0)#struct leitura do movimento do pacman
 
 .text 
 .globl main
 main:
-	# CHAMA DRAW GRID
+  
+     li $t0, 2
+     sw $t0, 0xffff0000   #habilita interrupção pelo teclado. 
+       # CHAMA DRAW GRID
     li $a0, GRID_1_COLS  
     li $a1, GRID_1_ROWS 
     la $a2, grid_1
