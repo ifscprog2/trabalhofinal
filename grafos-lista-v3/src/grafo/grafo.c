@@ -562,17 +562,18 @@ return fonte;
  *
  * @retval Nenhum
  */
-void imprimir_caminho(grafo_t *grafo, int destino, int fonte) {
+void imprimir_caminho(grafo_t *grafo, int fonte, int destino) {
 
 
 	puts("\nInicio imprimir caminho\n");
-	printf("caminho entre fonte:%d e destinho:%d\n ", destino, fonte);
+	printf("caminho entre fonte:%d e destinho:%d\n ", fonte, destino);
 
-    printf("%d\t", fonte);
+	printf("\nDistancia: %d\n", vertice_get_dist(procura_vertice(grafo, destino)));
+	printf("%d\t", destino);
+
 	while (fonte != destino) {
-		printf(" %d\t", vertice_get_predec(procura_vertice(grafo, fonte)));
-
-		fonte = vertice_get_predec(procura_vertice(grafo, fonte));
+		printf("No: %d\t", vertice_get_predec(procura_vertice(grafo, destino)));
+		destino = vertice_get_predec(procura_vertice(grafo, destino));
 
 	}
 
