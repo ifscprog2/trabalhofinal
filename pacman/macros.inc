@@ -5,10 +5,10 @@
 %name:
 .align 2
 	.word %id
-	.word %pos_x
-	.word %pos_y
-	.word %mov_x
-	.word %mov_y
+	.word %pos_x     #posicao x atual
+	.word %pos_y     #posicao y atual
+	.word %mov_x     # em movimento x se x = 1 ou -1
+	.word %mov_y     # em movimento y se y = 1 ou -1 
 .end_macro
 
 .macro moviment (%name, %valid, %x, %y)

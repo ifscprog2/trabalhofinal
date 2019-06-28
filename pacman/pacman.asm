@@ -12,31 +12,33 @@ moviment(mov_pacman,0,0,0)#struct leitura do movimento do pacman
 .text 
 .globl main
 main:
-  
+     #configuracoes
      li $t0, 2
-     sw $t0, 0xffff0000   #habilita interrupção pelo teclado. 
-       # CHAMA DRAW GRID
+     sw $t0, 0xffff0000   # habilita interrupção pelo teclado. 
+     la $t0, pacman
+     li $t1, 119         # posicao x inicial pacman
+     sw $t1, 4($t0)      # guarda estrurura pacman posicao x
+     li $t1, 140         # posicao y inicial pacman      
+     sw $t1, 8($t0)      # guarda estrurura pacman posicao x
+     
+    # CHAMA DRAW GRID (imprime grid)
     li $a0, GRID_1_COLS  
     li $a1, GRID_1_ROWS 
     la $a2, grid_1
     jal draw_grid  
 
-	# TESTE DRAW SPRITE
-    li   $s0,0
-    li   $s1,0
+
 main2:
-    move $a0,$s0  # x
-    move $a1,$s1  # y
-    li   $a2,3    #sprite
-    jal  draw_sprite
-    add $s0, $s0, 1
+    
+   
+    jal movement_pacman
 	
-	## DELAY(50)
+	
+    ## DELAY(50)
     li $v0, 32
     li $a0, 10
     syscall
-	
-	##=========
+    ##=========
     b main2
   
     

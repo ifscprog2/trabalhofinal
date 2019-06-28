@@ -130,3 +130,83 @@ add $a0, $a0, $t9
 sw  $a2, 0($a0)
 
 jr  $ra
+
+
+#pacman movement
+# void movement_pacman();
+
+.globl movement_pacman
+movement_pacman:
+# |-----------|
+# | $a0       | 0 ($sp)
+# | $a1       | 4 ($sp)
+# | $a2       | 8 ($sp)
+# | $s0       | 12 ($sp)
+# | $s1       | 16($sp)
+# | $s2       | 20 ($sp)
+# | $s3       | 24 ($sp)
+# | $ra       | 28 ($sp)
+# |===========|
+# | $a0       | 32 ($sp) (quadro anterior)
+# | $a1       | 36($sp)
+# | $a2       | 40($p)
+# |-----------|	
+addi $sp, $sp, -32
+sw $s0,12($sp)
+sw $s1,16($sp)
+sw $s2,20($sp)
+sw $s3,24($sp)
+sw $ra,28($sp)    
+ 
+    li $a2,3    #sprite
+    la $t0, pacman
+    lw $s0, 4($t0)      # posicao x  pacman
+    lw $s1, 8($t0)      # posicao y  pacman   
+    la $t3,  mov_pacman # carrega estrutura movimento pacman
+    lw $s2, 0($t3)      # carrega validade movimento
+    lw $s3, 4($t3)      # carrega se ha movimento x x=1-> mov(+)   x=0-> mov(0)   x=-1-> mov(-)
+    lw $s4, 8($t3)      # carrega se ha movimento y y=1-> mov(+)   y=0-> mov(0)   y=-1-> mov(-)
+          
+    beq $s2, $zero, movement_pacman_end
+    beq $s3, 1, movement_pacman_x_mais
+    beq $s3, -1,movement_pacman_x_menos
+    beq $s4, 1, movement_pacman_y_mais
+    beq $s4, -1, movement_pacman_y_menos
+    j movement_pacman_end
+  
+movement_pacman_x_mais:
+    addi  $a0,$s0, 1   # x
+    move  $a1, $s1       # y
+    sw    $a0, 4($t0)      # salva posicao x  pacman
+    jal   draw_sprite
+    j movement_pacman_end    
+movement_pacman_x_menos:
+    addi  $a0, $s0, -1   # x
+    move  $a1, $s1       # y
+    sw    $a0, 4($t0)      # salva posicao x  pacman
+    jal  draw_sprite
+    j movement_pacman_end
+movement_pacman_y_mais:
+    move  $a0,$s0          # x
+    addi  $a1,$s1, -1       # y
+    sw    $a1, 8($t0)      # salva posicao y  pacman
+    jal  draw_sprite
+    j movement_pacman_end
+movement_pacman_y_menos:    
+    move  $a0,$s0          # x
+    addi  $a1,$s1, +1       # y
+    sw    $a1, 8($t0)      # salva posicao y  pacman
+    jal  draw_sprite
+    j movement_pacman_end
+ 
+
+movement_pacman_end:
+lw $s0, 12($sp)
+lw $s1, 16($sp)
+lw $s2, 20($sp)
+lw $s3, 24($sp)
+lw $ra, 28($sp)       #restaura valores
+addi $sp, $sp, 32     #destroi pilha
+jr   $ra
+    
+
