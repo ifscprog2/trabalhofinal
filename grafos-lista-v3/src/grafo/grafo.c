@@ -22,136 +22,23 @@
 #include "vertice.h"
 #include "../lista_enc/lista_enc.h"
 #include "../lista_enc/no.h"
-#include "../fila/fila.h"
-#include "../pilha/pilha.h"
+
 
 #define FALSE 0
 #define TRUE 1
 #define INFINITO_BELL 65535
-
-#define DEBUG_BELL
-
 #define INFINITO INT_MAX
+//#define DEBUG_BELL
+
+
 
 struct grafos {
 	int id; /*!< Identificação numérica do grafo  */
 	lista_enc_t *vertices; /*!< Lista encadeada dos vértices: conjunto V  */
 };
 
-/**
- * @brief  Busca em largura
- * @param	grafo: ponteiro do grafo que se deseja executar a busca
- * @param  inicial: ponteiro do vértice inicial (fonte) da busca
- *
- * @retval Nenhum: Vértices são marcados internamente
- */
-void bfs(grafo_t *grafo, vertice_t* vertice_inicial) {
 
-	printf("\nIniciando bfs\n");
 
-	fila_t *Q = cria_fila();
-
-	no_t *meu_no_vertice = obter_cabeca(grafo->vertices);
-
-	while (meu_no_vertice) {
-		vertice_t *meu_vertice = obter_dado(meu_no_vertice);
-		vertice_set_distancia(meu_vertice, INFINITO);
-		vertice_set_pai(meu_vertice, NULL);
-		meu_no_vertice = obtem_proximo(meu_no_vertice);
-
-	}
-
-	vertice_set_distancia(vertice_inicial, 0);
-	enqueue(vertice_inicial, Q);
-
-	while (!fila_vazia(Q)) {
-
-		vertice_t *u = dequeue(Q);
-
-		lista_enc_t *lista_arestas = vertice_get_arestas(u);
-		no_t *no_arest = obter_cabeca(lista_arestas);
-
-		while (no_arest) {
-			arestas_t *aresta = obter_dado(no_arest);
-			vertice_t *v = aresta_get_adjacente(aresta);  //aresta->destino
-#ifdef DEBUG
-					printf("vetice adjacente %p\t  vertice atual %p\n", v, u);
-#endif //DEBUG
-
-			if (vertice_get_distancia(v) == INFINITO) {
-				vertice_set_pai(v, u);
-				vertice_set_distancia(v, vertice_get_distancia(u) + 1);
-				enqueue(v, Q);
-
-				printf("setando %.2d, \t Distancia %.2d \t Pai:%.2d\n",
-						vertice_get_id(v), vertice_get_distancia(v),
-						vertice_get_id(u));
-
-			}
-
-			no_arest = obtem_proximo(no_arest);
-		}
-
-	}
-
-}
-
-/**
- * @brief  Busca em profundidade
- * @param	grafo: ponteiro do grafo que se deseja executar a busca
- * @param  inicial: ponteiro do vértice inicial (fonte) da busca
- *
- * @retval Nenhum: Vértices são marcados internamente
- */
-void dfs(grafo_t *grafo, vertice_t* vertice_inicial) {
-
-	vertice_t *v;
-
-	printf("\nIniciando dfs\n");
-
-	pilha_t *S = cria_pilha();
-
-	no_t *meu_no_vertice = obter_cabeca(grafo->vertices);
-
-	while (meu_no_vertice) {
-		vertice_t *meu_vertice = obter_dado(meu_no_vertice);
-		vertice_set_visitado(meu_vertice, FALSE);
-		meu_no_vertice = obtem_proximo(meu_no_vertice);
-
-	}
-
-	push(vertice_inicial, S);
-
-	while (!pilha_vazia(S)) {
-
-		vertice_t *u = pop(S);
-
-		if (!vertice_get_visitado(u)) {
-			vertice_set_visitado(u, TRUE);
-
-			lista_enc_t *lista_arestas = vertice_get_arestas(u);
-			no_t *no_arest = obter_cabeca(lista_arestas);
-
-			while (no_arest) {
-				arestas_t *aresta = obter_dado(no_arest);
-				v =
-						aresta_get_adjacente(aresta);  //aresta->destino
-#ifdef DEBUG
-								printf("vetice adjacente %p\t  vertice atual %p\n", v, u);
-#endif //DEBUG
-				if (!vertice_get_visitado(v)) {
-					push(v, S);
-					printf("Vertice pai %.2d, \t  Vertice visitado:%.2d\n",
-							vertice_get_id(u), vertice_get_id(v));
-
-				}
-				no_arest = obtem_proximo(no_arest);
-			}
-
-		}
-
-	}
-}
 /**
  * @brief  Cria uma novo grafo
  * @param	id: Identificação numérica do grafo
@@ -439,13 +326,6 @@ void libera_grafo(grafo_t *grafo) {
 	free(grafo);
 }
 
-void delay(unsigned int milliseconds) {
-
-	clock_t start = clock();
-
-	while ((clock() - start) * 1000 / CLOCKS_PER_SEC < milliseconds)
-		;
-}
 
 void imprime_vertices(grafo_t* grafo) {
 
@@ -462,12 +342,12 @@ void imprime_vertices(grafo_t* grafo) {
 	printf("\nImprimindo id dos vértices do grafo:\n");
 	while (no) {
 		vertice = obter_dado(no);
-		printf("\n\nid vertice: %d", vertice_get_id(vertice));
+		//printf("\n\nid vertice: %d", vertice_get_id(vertice));
 
 		no_t* no_aresta = obter_cabeca(vertice_get_arestas(vertice));
 		while (no_aresta) {
 			aresta = obter_dado(no_aresta);
-			printf("\nid destino: %d", vertice_get_id(aresta_get_destino(aresta)));
+			//printf("\nid destino: %d", vertice_get_id(aresta_get_destino(aresta)));
 
 			no_aresta = obtem_proximo(no_aresta);
 		}
@@ -565,7 +445,7 @@ return fonte;
 void imprimir_caminho(grafo_t *grafo, int destino, int fonte) {
 
 
-	puts("\nInicio imprimir caminho\n");
+	puts("\n\nInicio imprimir caminho");
 	printf("caminho entre fonte:%d e destinho:%d\n ", destino, fonte);
 
     printf("%d\t", fonte);

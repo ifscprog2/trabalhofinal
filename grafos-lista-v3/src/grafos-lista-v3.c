@@ -23,16 +23,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-
-#include "pilha/pilha.h"
-#include "fila/fila.h"
 #include "grafo/grafo.h"
 
 int main(void) {
 
 	grafo_t *grafo1;
-
-	printf("Hello world!\n");
 
 	grafo1 = le_vertices_arquivo("vertices.txt");
 
@@ -41,6 +36,7 @@ int main(void) {
 
 	exportar_grafo_dot("grafo1.dot", grafo1);
 
+	libera_grafo(grafo1);
 
 	printf("\nfim progr v_03\n");
 

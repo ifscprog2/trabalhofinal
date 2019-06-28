@@ -16,7 +16,7 @@
 #define GRAFO_GRAFO_H_
 
 #include "vertice.h"
-#include "../pilha/pilha.h"
+
 
 typedef struct grafos grafo_t;
 
@@ -43,13 +43,6 @@ void exportar_grafo_dot(const char *filename, grafo_t *grafo);
 
 /* Libera memoria utilizada pelo grafo */
 void libera_grafo (grafo_t *grafo);
-
-
-void bfs(grafo_t *grafo, vertice_t* inicial);
-
-void dfs(grafo_t *grafo, vertice_t* inicial);
-
-void delay(unsigned int milliseconds);
 
 void imprime_vertices(grafo_t* grafo);
 
