@@ -65,7 +65,7 @@ colors: .word BLACK, BLUE, PURPLE, YELLOW
 
 .eqv SPRITE_SIZE 49
 sprites:
-#Comida (@)
+#Comida (@) (0x40) (64)
 .byte 0,0,0,0,0,0,0
 .byte 0,0,0,0,0,0,0
 .byte 0,0,0,6,0,0,0

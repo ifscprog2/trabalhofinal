@@ -136,6 +136,7 @@ jr $t0
     li $t1, 1 
     sw $t1, 0($t0)  #válido 
     sw $zero, 4($t0) #x
+    li $t1, -1 
     sw $t1, 8($t0)   #y
   j case_0_end
   
@@ -143,7 +144,6 @@ jr $t0
     li $t1, 1 
     sw $t1, 0($t0)  #válido 
     sw $zero, 4($t0) #x
-    li $t1, -1 
     sw $t1, 8($t0)   #y
   j case_0_end
   

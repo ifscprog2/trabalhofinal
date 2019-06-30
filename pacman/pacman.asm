@@ -6,7 +6,7 @@
 
 .data
 
-animed_sprite(pacman, 3, 0,0, 0,0)#struct animed
+animed_sprite(pacman, 3,0,0,0,0,0,0) #struct animed
 moviment(mov_pacman,0,0,0)#struct leitura do movimento do pacman
 
 .text 
@@ -28,19 +28,17 @@ main:
     jal draw_grid  
 
 
-main2:
+main_loop_1:
     
    
     jal movement_pacman
 	
 	
-    ## DELAY(50)
-    li $v0, 32
-    li $a0, 10
-    syscall
-    ##=========
-    b main2
-  
+	
+	
+	
+    macro_delay(50)   #delay 50ms
+    j main_loop_1
     
 main_end:      
 jr $ra
