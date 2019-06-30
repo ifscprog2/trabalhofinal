@@ -342,12 +342,12 @@ void imprime_vertices(grafo_t* grafo) {
 	printf("\nImprimindo id dos vértices do grafo:\n");
 	while (no) {
 		vertice = obter_dado(no);
-		//printf("\n\nid vertice: %d", vertice_get_id(vertice));
+		printf("\n\nid vertice: %d", vertice_get_id(vertice));
 
 		no_t* no_aresta = obter_cabeca(vertice_get_arestas(vertice));
 		while (no_aresta) {
 			aresta = obter_dado(no_aresta);
-			//printf("\nid destino: %d", vertice_get_id(aresta_get_destino(aresta)));
+			printf("\nid destino: %d", vertice_get_id(aresta_get_destino(aresta)));
 
 			no_aresta = obtem_proximo(no_aresta);
 		}
