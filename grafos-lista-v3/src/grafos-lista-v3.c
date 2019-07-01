@@ -23,6 +23,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+
+#include "importa_dados.h"
 #include "grafo/grafo.h"
 
 int main(void) {
