@@ -138,14 +138,14 @@ jr $t0
     sw $zero, 4($t0) #x
     li $t1, -1 
     sw $t1, 8($t0)   #y
-  j case_0_end
+    j case_0_end
   
   case_0_descer:
     li $t1, 1 
     sw $t1, 0($t0)  #válido 
     sw $zero, 4($t0) #x
     sw $t1, 8($t0)   #y
-  j case_0_end
+    j case_0_end
   
   case_0_direita:
     li $t1, 1 

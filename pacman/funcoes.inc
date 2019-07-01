@@ -77,12 +77,15 @@ draw_sprite:
 # | $a2       | 8 ($sp)
 # | $ra       | 12 ($sp)
 # |===========|
-# | $a0       | 8 ($sp) (quadro anterior)
-# | $a1       | 12($sp)
-# | $a2       | 16($p)
+# | $a0       | 16 ($sp) (quadro anterior)
+# | $a1       | 20($sp)
+# | $a2       | 24($p)
 # |-----------|	
 addi $sp, $sp, -16
-sw $ra, 12($sp)
+sw   $ra, 12($sp)
+sw   $a0, 16($sp)  #quadro pilha anterior
+sw   $a0, 20($sp)
+sw   $a0, 24($sp)
 
 		
 move $t0, $a0     # $t0 pos x
@@ -114,6 +117,10 @@ draw_sprite_loop:
 
 draw_sprite_end:
 lw $ra, 12($sp)       #restaura valores
+lw  $a0, 16($sp)      #quadro pilha anterior
+lw  $a0, 20($sp)
+lw  $a0, 24($sp)
+
 addi $sp, $sp, 16     #destroi pilha
 jr   $ra
     
@@ -171,31 +178,31 @@ sw $ra,28($sp)
     la $s2, pacman      # strut animed_sprite
     move $a2, $s2       # parametro para check_all 
     lw $s0, 4($s2)      # posicao atual x  pacman
-    move $a0, $s0       # parametro para check_all 
+    move $a0, $s0       # parametro para check_all / draw sprite
     lw $s1, 8($s2)      # posicao atual y  pacman   
-    move $a1, $s1       # parametro para check_all 
+    move $a1, $s1       # parametro para check_all / draw sprite
     jal check_wall
     li $a2,3            # parametro draw sprite
     
     la $t1,  mov_pacman # estrutura movimento pacman  (teclado)
     lw $t2, 0($t1)      # carrega validade movimento
     beq $t2, $zero, movement_pacman_end
-    lw $t3, 4($t1)      # carrega se ha movimento x x=1-> mov(+)   x=0-> mov(0)   x=-1-> mov(-)
-    lw $t4, 8($t1)      # carrega se ha movimento y y=1-> mov(+)   y=0-> mov(0)   y=-1-> mov(-)
+      lw $t3, 4($t1)      # carrega se ha movimento x x=1-> mov(+)   x=0-> mov(0)   x=-1-> mov(-)
+      lw $t4, 8($t1)      # carrega se ha movimento y y=1-> mov(+)   y=0-> mov(0)   y=-1-> mov(-)
         
     
-    beq $t3, 1, movement_pacman_x_mais
-    beq $t3, -1,movement_pacman_x_menos
-    beq $t4, 1, movement_pacman_y_mais
-    beq $t4, -1, movement_pacman_y_menos
+      beq $t3, 1, movement_pacman_x_mais
+      beq $t3, -1,movement_pacman_x_menos
+      beq $t4, 1, movement_pacman_y_mais
+      beq $t4, -1, movement_pacman_y_menos
     j movement_pacman_end
   
-movement_pacman_x_mais:   #direita
-    lw $t0, 12($s2)       #carrega move x
+movement_pacman_x_mais:     #direita
+    lw $t0, 12($s2)         #carrega move x animed_sprite
     andi $t0, $t0, 8        #bitwase #1000
     beqz $t0, movement_pacman_end  #se zero e parede
-      addi  $a0,$s0, 1     # x
-      move  $a1, $s1       # y
+      addi  $a0, $s0, 1      # x
+      move  $a1, $s1         # y
       sw    $a0, 4($s2)      # salva nova posicao x  pacman
       jal   draw_sprite
       j movement_pacman_end    
@@ -209,7 +216,7 @@ movement_pacman_x_menos:   #esquerda
       jal  draw_sprite
       j movement_pacman_end
 movement_pacman_y_mais:    #desce
-    lw $t0, 16($s2)       #carrega move x
+    lw $t0, 16($s2)       #carrega move y
     andi $t0, $t0, 2       #bitwase #0010
     beqz $t0, movement_pacman_end  #se zero e parede
      move  $a0,$s0          # x
@@ -218,7 +225,7 @@ movement_pacman_y_mais:    #desce
      jal  draw_sprite
      j movement_pacman_end
 movement_pacman_y_menos:    #sobe
-    lw $t0, 16($s2)       #carrega move x
+    lw $t0, 16($s2)       #carrega move y
     andi $t0, $t0, 1      #bitwase #0001
     beqz $t0, movement_pacman_end    #se zero e parede
       move  $a0,$s0          # x
@@ -280,44 +287,45 @@ add $t0, $t0, $t1  #verifica se está posicao 0x0 do sprite do grid
 bne $t0, $zero, check_wall_end    #$t0 tem valor, sprite nao esta posicao (0,0) 
   sw $zero, 12($a2) #reseta movimento x na struct sprite
   sw $zero, 16($a2) #reseta movimento y na struct sprite
-  
+ 
+aaaaaaaaaaaaa:   
   #verifica o sprite superior (-y) $v0 = 0001 se é parede
-  add $t0, $s1, -1       #posicao superior -y
+  addi $t0, $s1, -1       #posicao superior -y
   mul $t0, $t0,  GRID_1_ROWS        # calcula posicao do vetor grid
   add $t1, $t0, $s0      # pos = (y*35)+x
   la $t2, grid_1
   add $t2, $t2, $t1
   lb  $t3, 0($t2)
   bne $t3, 64, check_wall_ymais   #verifica se sprite superior é comida
-     lw $t5,16($a2)
+     lw $t5, 16($a2)
      addi $t5,$t5, 1           # mov_y = xxx1 -> parede no sprite superior 
      sw $t5, 16($a2)           #  salva move_y	
 
 check_wall_ymais: 
   #verifica o sprite inferior (+y) $v0 = xx1x se é parede
-  add $t0, $s1, 1       #posicao superior -y
+  addi $t0, $s1, 1       #posicao superior -y
   mul $t0, $t0,  GRID_1_ROWS        # calcula posicao do vetor grid
   add $t1, $t0, $s0      # pos = (y*35)+x
   la $t2, grid_1
   add $t2, $t2, $t1
   lb  $t3, 0($t2)
   bne $t3, 64, check_wall_xmais   #verifica se sprite inferior é comida
-     lw $t5,16($a2)
+     lw $t5, 16($a2)
      addi $t5, $t5, 2            # mov_y = xx1x -> parede no sprite inferior 
      sw $t5, 16($a2)           #  salva move_y	
      
 
 check_wall_xmais:
   #verifica o sprite direita (+x) $v0 = x1xx se é parede
-  add $t0, $s0, 1       #posicao superior +x
+  addi  $t0, $s0, 1       #posicao superior +x
   mul $t1, $s1,  GRID_1_ROWS        # calcula posicao do vetor grid
   add $t2, $t0, $t1      # pos = (y*35)+x
   la $t3, grid_1
   add $t3, $t3, $t2
   lb  $t4, 0($t3)
   bne $t4, 64, check_wall_xmenos   #verifica se sprite inferior é comida
-   lw $t5,12($a2)
-   addi $t5,$t5, 8            # mov_y = 1xxx -> parede no sprite direita
+   lw $t5, 12($a2)
+   addi $t5, $t5, 8            # mov_y = 1xxx -> parede no sprite direita
    sw $t5, 12($a2)           #  salva move_x	
   
 check_wall_xmenos:
@@ -325,13 +333,13 @@ check_wall_xmenos:
   add $t0, $s0, -1       #posicao superior -x
   mul $t1, $s1,  GRID_1_ROWS        # calcula posicao do vetor grid
   add $t2, $t0, $t1      # pos = (y*7)+x
-  la $t3, grid_1
+  la  $t3, grid_1
   add $t3, $t3, $t2
   lb  $t4, 0($t3)
   bne $t4, 64, check_wall_end   #verifica se sprite inferior é comida
-     lw $t5,12($a2)
-     addi  $t5, $t5, 4            # mov_y = x1xx -> parede no sprite esquerda
-     sw $t5, 12($a2)           #  salva move_x	
+     lw   $t5, 12($a2)
+     addi $t5, $t5, 4            # mov_y = x1xx -> parede no sprite esquerda
+     sw   $t5, 12($a2)           #  salva move_x	
   
 check_wall_end:
 lw $s0, 12($sp)

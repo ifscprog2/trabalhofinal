@@ -1,12 +1,12 @@
 .include "graphics.inc"
-.include "funcoes.inc"
+.include "funcoes1.inc"
 .include "macros.inc"
 .include "interrupt.inc"
 
 
 .data
 
-animed_sprite(pacman, 3,0,0,0,0,0,0) #struct animed
+animed_sprite(pacman,3,0,0,0,0,0,0,0) #struct animed
 moviment(mov_pacman,0,0,0)#struct leitura do movimento do pacman
 
 .text 
