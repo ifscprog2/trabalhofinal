@@ -398,7 +398,7 @@ int vertice_get_dist(vertice_t *vertice) {
   *
   * @retval int: predec da aresta
   */
-vertice_t* vertice_get_predec(vertice_t *vertice) {
+int vertice_get_predec(vertice_t *vertice) {
 
 	if (vertice == NULL){
 			fprintf(stderr, "vertice_get_grupo: vertice invalido\n");

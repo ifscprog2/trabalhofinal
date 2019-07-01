@@ -446,13 +446,15 @@ void imprimir_caminho(grafo_t *grafo, int destino, int fonte) {
 
 
 	puts("\n\nInicio imprimir caminho");
-	printf("caminho entre fonte:%d e destinho:%d\n ", destino, fonte);
+	printf("caminho entre fonte:%d e destino:%d\n ", fonte, destino);
 
-    printf("%d\t", fonte);
-	while (fonte != destino) {
-		printf(" %d\t", vertice_get_predec(procura_vertice(grafo, fonte)));
+    printf("%d\t", destino);
+	while (destino != fonte) {
 
-		fonte = vertice_get_predec(procura_vertice(grafo, fonte));
+	    destino = vertice_get_predec(procura_vertice(grafo, destino));
+		printf(" %d\t", destino);
+
+
 
 	}
 

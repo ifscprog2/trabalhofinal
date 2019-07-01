@@ -106,7 +106,7 @@ int vertice_get_dist(vertice_t *vertice);
 
 /* Obtem membro predec da struct vertice
  * Ver: struct vertices */
-vertice_t* vertice_get_predec(vertice_t *vertice);
+int vertice_get_predec(vertice_t *vertice);
 
 
 

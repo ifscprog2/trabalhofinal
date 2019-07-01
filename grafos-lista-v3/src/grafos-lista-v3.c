@@ -33,8 +33,8 @@ int main(void) {
 
 	grafo1 = le_vertices_arquivo("vertices.txt");
 
-	//bellman_ford(grafo1,513);  //menor caminho  para no
-	imprimir_caminho(grafo1, bellman_ford(grafo1,1), 513 );  //destino->fonte
+	bellman_ford(grafo1,1);  //menor caminho  para no
+	imprimir_caminho(grafo1, 513, 1 );  //destino->fonte
 
 	exportar_grafo_dot("grafo1.dot", grafo1);
 
