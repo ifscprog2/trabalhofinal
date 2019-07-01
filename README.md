@@ -1,5 +1,5 @@
 # README 
- Este repositório contém um projeto do jogo Pacman (pacman) em desenvolvimento, em Assembly para o MIPS e, projeto em C que utiliza grafo (grafos-lista-v3).
+ Este repositório contém um projeto do jogo Pacman (pacman) em desenvolvimento, em Assembly para o MIPS e,um projeto em C que utiliza grafo (grafos-lista-v3).
  
   # grafos-lista-v3: 
   Contém um programa em C, desenvolvido para modelar parte da planta de carrinhos industriais autômatos de uma empresa por meio de um grafo, que por sua vez, utiliza a estrutura de lista encadeada e, descobrir os caminhos mínimos que os carrinhos autômatos podem percorrer.
