@@ -180,9 +180,38 @@ sw $ra,28($sp)
     la $t1,  mov_pacman # estrutura movimento pacman  (teclado)
     lw $t2, 0($t1)      # carrega validade movimento
     beq $t2, $zero, movement_pacman_end
+    
+      
     lw $t3, 4($t1)      # carrega se ha movimento x x=1-> mov(+)   x=0-> mov(0)   x=-1-> mov(-)
     lw $t4, 8($t1)      # carrega se ha movimento y y=1-> mov(+)   y=0-> mov(0)   y=-1-> mov(-)
-        
+    beq $t3, 1, movement_pacman_1
+      lw $t0, 12($s2)       #carrega move x
+      beqz $t0, movement_pacman_1  #se zero e parede
+        li $t1, 1
+        sw $t1, 20($s2)       
+movement_pacman_1:    
+     beq $t3, -1, movement_pacman_2
+      lw $t0, 12($s2)       #carrega move x
+      beqz $t0, movement_pacman_2  #se zero e parede
+        li $t1, -1
+        sw $t1, 20($s2)	
+movement_pacman_2:    
+     beq $t4, 1, movement_pacman_3
+      lw $t0, 16($s2)       #carrega move y
+      beqz $t0, movement_pacman_3  #se zero e parede
+        li $t1, 1
+        sw $t1, 24($s2)
+movement_pacman_3:    
+     beq $t4, -1, movement_pacman_3
+      lw $t0, 16($s2)       #carrega move y
+      beqz $t0, movement_pacman_3  #se zero e parede
+        li $t1, -1
+        sw $t1, 24($s2)
+
+    
+    lw $t3, 20($s2)      # carrega se ha movimento x x=1-> mov(+)   x=0-> mov(0)   x=-1-> mov(-)
+    lw $t4, 24($s2)      # carrega se ha movimento y y=1-> mov(+)   y=0-> mov(0)   y=-1-> mov(-)
+          
     
     beq $t3, 1, movement_pacman_x_mais
     beq $t3, -1,movement_pacman_x_menos
@@ -191,7 +220,7 @@ sw $ra,28($sp)
     j movement_pacman_end
   
 movement_pacman_x_mais:   #direita
-    lw $t0, 12($s2)       #carrega move x
+    lw $t0, 20($s2)       #carrega move x
     andi $t0, $t0, 8        #bitwase #1000
     beqz $t0, movement_pacman_end  #se zero e parede
       addi  $a0,$s0, 1     # x
@@ -200,7 +229,7 @@ movement_pacman_x_mais:   #direita
       jal   draw_sprite
       j movement_pacman_end    
 movement_pacman_x_menos:   #esquerda
-    lw $t0, 12($s2)       #carrega move x
+    lw $t0, 20($s2)       #carrega move x
     andi $t0, $t0, 4       #bitwase #0100
     beqz $t0, movement_pacman_end   #se zero e parede
       addi  $a0, $s0, -1   # x
@@ -209,7 +238,7 @@ movement_pacman_x_menos:   #esquerda
       jal  draw_sprite
       j movement_pacman_end
 movement_pacman_y_mais:    #desce
-    lw $t0, 16($s2)       #carrega move x
+    lw $t0, 24($s2)       #carrega move x
     andi $t0, $t0, 2       #bitwase #0010
     beqz $t0, movement_pacman_end  #se zero e parede
      move  $a0,$s0          # x
@@ -218,7 +247,7 @@ movement_pacman_y_mais:    #desce
      jal  draw_sprite
      j movement_pacman_end
 movement_pacman_y_menos:    #sobe
-    lw $t0, 16($s2)       #carrega move x
+    lw $t0, 24($s2)       #carrega move x
     andi $t0, $t0, 1      #bitwase #0001
     beqz $t0, movement_pacman_end    #se zero e parede
       move  $a0,$s0          # x
@@ -244,7 +273,7 @@ jr   $ra
 # check_wall
 # void check_wall(int x_atual, int y_atual, *struct_animed_sprite);
 #--------------------------------------------#
-# $a0-> posicao x atual sprite   $a1-> posicao y atual sprite   $a2-> *struct animed sprite      
+# $a0-> posicao x atual sprite   $a1-> posicao y atual sprite   $a2-> struct animed sprite      
 # #$ao e $a1 posicao grid em pixel
 # salva informacao strutura sprite mov_x mov_y
 # $v0 = xxx1->parede superior   xx1x->parede inferior    x1xx-> parededireita      1xxx->parede esquerda
@@ -289,8 +318,8 @@ bne $t0, $zero, check_wall_end    #$t0 tem valor, sprite nao esta posicao (0,0)
   add $t2, $t2, $t1
   lb  $t3, 0($t2)
   bne $t3, 64, check_wall_ymais   #verifica se sprite superior é comida
-     lw $t5,16($a2)
-     addi $t5,$t5, 1           # mov_y = xxx1 -> parede no sprite superior 
+     lw $t5, 16($a2)           # carrega movimento y da struct sprite
+     add $t5, $t5, 1            # mov_y = xxx1 -> parede no sprite superior 
      sw $t5, 16($a2)           #  salva move_y	
 
 check_wall_ymais: 
@@ -302,8 +331,8 @@ check_wall_ymais:
   add $t2, $t2, $t1
   lb  $t3, 0($t2)
   bne $t3, 64, check_wall_xmais   #verifica se sprite inferior é comida
-     lw $t5,16($a2)
-     addi $t5, $t5, 2            # mov_y = xx1x -> parede no sprite inferior 
+     lw $t5, 16($a2)           # carrega movimento y da struct sprite
+     add $t5, $t5, 2            # mov_y = xx1x -> parede no sprite inferior 
      sw $t5, 16($a2)           #  salva move_y	
      
 
@@ -316,8 +345,8 @@ check_wall_xmais:
   add $t3, $t3, $t2
   lb  $t4, 0($t3)
   bne $t4, 64, check_wall_xmenos   #verifica se sprite inferior é comida
-   lw $t5,12($a2)
-   addi $t5,$t5, 8            # mov_y = 1xxx -> parede no sprite direita
+   lw $t5, 12($a2)           # carrega movimento y da struct sprite
+   add $t5, $t5, 8            # mov_y = 1xxx -> parede no sprite direita
    sw $t5, 12($a2)           #  salva move_x	
   
 check_wall_xmenos:
@@ -329,8 +358,8 @@ check_wall_xmenos:
   add $t3, $t3, $t2
   lb  $t4, 0($t3)
   bne $t4, 64, check_wall_end   #verifica se sprite inferior é comida
-     lw $t5,12($a2)
-     addi  $t5, $t5, 4            # mov_y = x1xx -> parede no sprite esquerda
+     lw $t5, 12($a2)           # carrega movimento y da struct sprite
+     add $t5, $t5, 4            # mov_y = x1xx -> parede no sprite esquerda
      sw $t5, 12($a2)           #  salva move_x	
   
 check_wall_end:

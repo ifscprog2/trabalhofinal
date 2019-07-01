@@ -133,37 +133,40 @@ jr $t0
   	j case_0_end
   	  	
   case_0_subir:
-  li $t1, 1 
-  sw $t1, 0($t0)  #válido 
-  sw $zero, 4($t0) #x
-  sw $t1, 8($t0)  #y
+    li $t1, 1 
+    sw $t1, 0($t0)  #válido 
+    sw $zero, 4($t0) #x
+    li $t1, -1 
+    sw $t1, 8($t0)   #y
   j case_0_end
   
   case_0_descer:
-  li $t1, 1 
-  sw $t1, 0($t0)  #válido 
-  sw $zero, 4($t0) #x
-  li $t1, -1
-  sw $t1, 8($t0)  #y
+    li $t1, 1 
+    sw $t1, 0($t0)  #válido 
+    sw $zero, 4($t0) #x
+    sw $t1, 8($t0)   #y
   j case_0_end
   
   case_0_direita:
-  li $t1, 1 
-  sw $t1, 0($t0)  #válido 
-  sw $t1, 4($t0) #x
-  sw $zero, 8($t0)  #y
+    li $t1, 1 
+    sw $t1, 0($t0)  #válido 
+    sw $t1, 4($t0)    #x
+    sw $zero, 8($t0)  #y
   j case_0_end
   
   case_0_esquerda:
-  li $t1, 1 
-  sw $t1, 0($t0)  #válido
-  li $t1, -1 
-  sw $t1, 4($t0) #x
-  sw $zero, 8($t0)  #y
+    li $t1, 1 
+    sw $t1, 0($t0)  #válido
+    li $t1, -1 
+    sw $t1, 4($t0)    #x
+    sw $zero, 8($t0)  #y
   j case_0_end
     	  	  	
-case_0_end:
-  	j exit
+  case_0_end:
+    mfc0 $k0, $14 	# $k0 = EPC  
+    addiu $k0, $k0, -4      # Decrement $k0 by 4
+    mtc0 $k0, $14
+  j exit
   	
   case_4:
 	la $a0, print4
@@ -299,7 +302,7 @@ lwc1 $f29, 232($k1)
 lwc1 $f30, 236($k1)
 lwc1 $f31, 240($k1)
 mfc0 $k0, $14 	# $k0 = EPC
-addiu $k0, $k0, 4 # Increment $k0 by 4
+addiu $k0, $k0, 4       # Increment $k0 by 4
 mtc0 $k0, $14 	# EPC = point to next instruction
 eret		# retorno da exceção	
 
