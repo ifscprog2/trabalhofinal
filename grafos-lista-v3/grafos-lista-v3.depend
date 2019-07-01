@@ -1,0 +1,83 @@
+# depslib dependency file v1.0
+1561904384 source:c:\users\arian\documents\git_ariane\prog2_projetos\grafos-lista-v3\src\grafos-lista-v3.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	"importa_dados.h"
+	"grafo/grafo.h"
+
+1560866305 c:\users\arian\documents\git_ariane\prog2_projetos\grafos-lista-v3\src\pilha\pilha.h
+
+1560866305 c:\users\arian\documents\git_ariane\prog2_projetos\grafos-lista-v3\src\fila\fila.h
+
+1561901674 c:\users\arian\documents\git_ariane\prog2_projetos\grafos-lista-v3\src\grafo\grafo.h
+	"vertice.h"
+
+1560866305 c:\users\arian\documents\git_ariane\prog2_projetos\grafos-lista-v3\src\grafo\vertice.h
+	"../lista_enc/lista_enc.h"
+
+1560866305 c:\users\arian\documents\git_ariane\prog2_projetos\grafos-lista-v3\src\lista_enc\lista_enc.h
+	"no.h"
+
+1560866305 c:\users\arian\documents\git_ariane\prog2_projetos\grafos-lista-v3\src\lista_enc\no.h
+
+1561902373 source:c:\users\arian\documents\git_ariane\prog2_projetos\grafos-lista-v3\src\ariane.c
+	<stdlib.h>
+	<stdio.h>
+	<locale.h>
+	<string.h>
+	"grafo/grafo.h"
+
+1560866305 source:c:\users\arian\documents\git_ariane\prog2_projetos\grafos-lista-v3\src\fila\fila.c
+	<stdlib.h>
+	<stdio.h>
+	"../lista_enc/lista_enc.h"
+	"../lista_enc/no.h"
+	"fila.h"
+
+1561140521 source:c:\users\arian\documents\git_ariane\prog2_projetos\grafos-lista-v3\src\grafo\vertice.c
+	<stdlib.h>
+	<stdio.h>
+	"vertice.h"
+	"../lista_enc/lista_enc.h"
+
+1560866305 source:c:\users\arian\documents\git_ariane\prog2_projetos\grafos-lista-v3\src\lista_enc\lista_enc.c
+	<stdio.h>
+	<stdlib.h>
+	"lista_enc.h"
+	"no.h"
+
+1560866305 source:c:\users\arian\documents\git_ariane\prog2_projetos\grafos-lista-v3\src\lista_enc\no.c
+	<stdio.h>
+	<stdlib.h>
+	"no.h"
+
+1560866305 source:c:\users\arian\documents\git_ariane\prog2_projetos\grafos-lista-v3\src\pilha\pilha.c
+	<stdlib.h>
+	<stdio.h>
+	"../lista_enc/lista_enc.h"
+	"../lista_enc/no.h"
+	"pilha.h"
+
+1561905359 source:c:\users\arian\documents\git_ariane\prog2_projetos\grafos-lista-v3\src\grafo\grafo.c
+	<stdio.h>
+	<stdlib.h>
+	<stdarg.h>
+	<limits.h>
+	<time.h>
+	"grafo.h"
+	"vertice.h"
+	"../lista_enc/lista_enc.h"
+	"../lista_enc/no.h"
+
+1561905328 source:c:\users\arian\documents\git_ariane\prog2_projetos\grafos-lista-v3\src\importa_dados.c
+	<stdlib.h>
+	<stdio.h>
+	<locale.h>
+	<string.h>
+	"importa_dados.h"
+	"grafo/grafo.h"
+
+1561903135 c:\users\arian\documents\git_ariane\prog2_projetos\grafos-lista-v3\src\importa_dados.h
+	"grafo/grafo.h"
+
