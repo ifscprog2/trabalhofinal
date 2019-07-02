@@ -53,7 +53,7 @@ grafo_t* le_vertices_arquivo(const char* filename)
     }
 
     rewind(fp);
-    //obter as arestas
+    //obter as arestas da ariane
     while (fgets(buffer, 100, fp) != NULL)
     {
         memcpy(buffer_temp, buffer, 12);
