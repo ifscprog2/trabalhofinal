@@ -369,7 +369,7 @@ void imprime_vertices(grafo_t* grafo) {
 
 int bellman_ford(grafo_t *grafo, int fonte) {
 
-	printf("Inicio de Bellman-Ford -> vertice fonte:%d", fonte);
+	printf("Inicio de Bellman-Ford -> vertice fonte: %d", fonte);
 
 	int nova_distancia, i;
 	no_t *aresta_no, *vertice_no;
@@ -446,18 +446,23 @@ void imprimir_caminho(grafo_t *grafo, int destino, int fonte) {
 
 
 	puts("\n\nInicio imprimir caminho");
-	printf("caminho entre fonte:%d e destino:%d\n ", fonte, destino);
+	printf("caminho entre fonte: %d e destino: %d\n ", fonte, destino);
 
-    printf("%d\t", destino);
+	//vertice destino que contém a distância total da fonte
+	vertice_t* vertice_destino = procura_vertice(grafo, destino);
+	int dist_total = vertice_get_dist(vertice_destino);
+
+	printf (" \nDistância total da fonte ao destino: %.3lf m\n", dist_total/100.0);
+
+    printf("%d\t\n", destino);
+
+
 	while (destino != fonte) {
 
 	    destino = vertice_get_predec(procura_vertice(grafo, destino));
-		printf(" %d\t", destino);
-
-
+		printf("%d\t\n", destino);
 
 	}
-
 
 }
 

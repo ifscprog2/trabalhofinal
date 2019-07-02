@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1562016652 source:c:\users\arian\documents\git_ariane\prog2_projetos\grafos-lista-v3\src\grafos-lista-v3.c
+1562020493 source:c:\users\arian\documents\git_ariane\prog2_projetos\grafos-lista-v3\src\grafos-lista-v3.c
 	<stdio.h>
 	<stdlib.h>
 	<time.h>
@@ -59,7 +59,7 @@
 	"../lista_enc/no.h"
 	"pilha.h"
 
-1562016618 source:c:\users\arian\documents\git_ariane\prog2_projetos\grafos-lista-v3\src\grafo\grafo.c
+1562020959 source:c:\users\arian\documents\git_ariane\prog2_projetos\grafos-lista-v3\src\grafo\grafo.c
 	<stdio.h>
 	<stdlib.h>
 	<stdarg.h>
