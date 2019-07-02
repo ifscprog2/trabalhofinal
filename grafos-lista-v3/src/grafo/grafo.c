@@ -23,12 +23,11 @@
 #include "../lista_enc/lista_enc.h"
 #include "../lista_enc/no.h"
 
-
 #define FALSE 0
 #define TRUE 1
 #define INFINITO_BELL 65535
 
-#define DEBUG_BELL
+//#define DEBUG_BELL
 
 #define INFINITO INT_MAX
 
@@ -197,7 +196,6 @@ void exportar_grafo_dot(const char *filename, grafo_t *grafo) {
 	vertice_t *vertice;
 	vertice_t *adjacente;
 	arestas_t *aresta;
-	arestas_t *contra_aresta;
 	lista_enc_t *lista_arestas;
 
 	int peso;
@@ -352,14 +350,13 @@ void imprime_vertices(grafo_t* grafo) {
 		no_t* no_aresta = obter_cabeca(vertice_get_arestas(vertice));
 		while (no_aresta) {
 			aresta = obter_dado(no_aresta);
-			printf("\nid destino: %d", vertice_get_id(aresta_get_destino(aresta)));
+			printf("\nid destino: %d",
+					vertice_get_id(aresta_get_destino(aresta)));
 
 			no_aresta = obtem_proximo(no_aresta);
 		}
 
-
 		no = obtem_proximo(no);
-
 
 	}
 }
@@ -428,16 +425,16 @@ int bellman_ford(grafo_t *grafo, int fonte) {
 	vertice_no = obter_cabeca(grafo->vertices);
 	//varre todos vertices
 	while (vertice_no) {
-		printf("\nvertice visitado:%d\t  dist:%d", vertice_get_id(obter_dado(vertice_no)), vertice_get_dist(obter_dado(vertice_no)));
+		printf("\nvertice visitado:%d\t  dist:%d",
+				vertice_get_id(obter_dado(vertice_no)),
+				vertice_get_dist(obter_dado(vertice_no)));
 		vertice_no = obtem_proximo(vertice_no);
 	}
 #endif // DEBUG
 
-return fonte;
+	return fonte;
 
 }
-
-
 
 /**
  * @brief  Imprime o caminho de menor dist√¢ncia. Execute Bellman-Ford previamente.
@@ -449,35 +446,17 @@ return fonte;
  */
 void imprimir_caminho(grafo_t *grafo, int fonte, int destino) {
 
-
-<<<<<<< HEAD
 	puts("\nInicio imprimir caminho\n");
-	printf("caminho entre fonte:%d e destinho:%d\n ", fonte, destino);
-
-	printf("\nDistancia: %d\n", vertice_get_dist(procura_vertice(grafo, destino)));
-	printf("%d\t", destino);
-
-	while (fonte != destino) {
-		printf("No: %d\t", vertice_get_predec(procura_vertice(grafo, destino)));
-		destino = vertice_get_predec(procura_vertice(grafo, destino));
-=======
-	puts("\n\nInicio imprimir caminho");
 	printf("caminho entre fonte: %d e destino: %d\n ", fonte, destino);
 
-	//vertice destino que contÈm a dist‚ncia total da fonte
-	vertice_t* vertice_destino = procura_vertice(grafo, destino);
-	int dist_total = vertice_get_dist(vertice_destino);
+	printf("\nDistancia: %.3lf m\n",
+			vertice_get_dist(procura_vertice(grafo, destino))/100.0);
+	printf("No: %d\n", destino);
 
-	printf (" \nDist‚ncia total da fonte ao destino: %.3lf m\n", dist_total/100.0);
->>>>>>> origin/ariane
+	while (fonte != destino) {
+		destino = vertice_get_predec(procura_vertice(grafo, destino));
+		printf("No: %d\n ",destino);
 
-    printf("%d\t\n", destino);
-
-
-	while (destino != fonte) {
-
-	    destino = vertice_get_predec(procura_vertice(grafo, destino));
-		printf("%d\t\n", destino);
 
 	}
 
