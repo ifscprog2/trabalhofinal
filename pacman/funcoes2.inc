@@ -152,26 +152,55 @@ jr  $ra
 
 #--------------------------------------------#
 # check_wall
-# int check_wall(*grid, int x,int y);
+# int check_wall(int x,int y, *grid);
 #--------------------------------------------#
-# $a0-> ponteiro do grid   $a1-> posição no grid X $a2-> posição no grid Y      
+# $a0-> posição no grid X $a1-> posição no grid Y  $a2-> ponteiro do grid      
 # $v0 = retorna 1 tem parede e 0 não tem parede
 .globl check_wall
+# |-----------|
+# | $a0       | 0 ($sp)
+# | $a1       | 4 ($sp)
+# | $a2       | 8 ($sp)
+# | $s0       | 12 ($sp)
+# | $s1       | 16 ($sp)
+# | $s2       | 20 ($sp)
+# | $s3       | 24 ($sp)
+# | $ra       | 28 ($sp)
+# |===========|
+# | $a0       | 32 ($sp) (quadro anterior)
+# | $a1       | 36($sp)
+# | $a2       | 40($p)
+# |-----------|	
 check_wall:
+addi $sp, $sp, -32
+sw $s0, 12($sp)
+sw $s1, 16($sp)
+sw $s2, 20($sp)
+sw $s3, 24($sp)
+sw $ra, 28($sp)
 
-mult $t0, $a2, GRID_1_COLS   #calcula posicao do grid          
-add $t1, $a1, $t0   #posição final no grid   
-add $t1, $t1, $a0 #posição do vetor grid
-lb $t0, 0($t1) #carrega o id do sprite
+
+
+mul $s0, $a1, GRID_1_ROWS   #calcula posicao do grid          
+add $s1, $a0, $s0   #posição final no grid   
+add $s1, $s1, $a2 #posição do vetor grid
+lb $s0, 0($s1) #carrega o id do sprite
 
 move $v0, $zero #caso não tenha parede
 
-beq $t0, 64, check_wall_end    #verifica se é comida
-beq $t0, 65, check_wall_end    #verifica se é a pílula
-beq $t0, 68, check_wall_end    #verifica se é a cereja
+beq $s0, 64, check_wall_end    #verifica se é comida
+beq $s0, 65, check_wall_end    #verifica se é a pílula
+beq $s0, 68, check_wall_end    #verifica se é a cereja
  
 addi $v0, $v0, 1 #tem parede
   
 check_wall_end:
+lw $s0, 12($sp)
+lw $s1, 16($sp)
+lw $s2, 20($sp)
+lw $s3, 24($sp)
+lw $ra, 28($sp)
+addi $sp, $sp, 32     #destroi pilha
 jr   $ra
+    
     

@@ -6,8 +6,8 @@
 %name:
 .align 2
 	.word %id            # 0
-	.word %pos_x         # 4 posicao x atual pixel
-	.word %pos_y         # 8 posicao y atual pixel
+	.word %pos_x         # 4 posicao x grid 
+	.word %pos_y         # 8 posicao y grid
 	.word %mov_x         # 12 movimento atual x
 	.word %mov_y         # 16 movimento atual y
         .word %inven         # 20 invencibilidade  0-> vencivel 
@@ -61,20 +61,6 @@ li $v0, 32
 syscall
  	
 .end_macro
-
-#--------------------------------------------#
-#pixel_to_grid (x, y)
-#--------------------------------------------#
-.macro pixel_to_grid(%x,%y)
-.data
-
-.text
-
-div $a0, %x, 7
-div $a1, %y, 7
- 	
-.end_macro
-
 
 
 
