@@ -3,6 +3,7 @@ j main
 
 #--------------------------------------------#                                                                          
 # draw_grid(cols, rows, *grid_table)
+#ari
 #--------------------------------------------#
 # $A0 - cols  $A1->rows   $A2->GRID
 .globl draw_grid
