@@ -62,6 +62,19 @@ syscall
  	
 .end_macro
 
+#--------------------------------------------#
+#pixel_to_grid (x, y)
+#--------------------------------------------#
+.macro pixel_to_grid(%x,%y)
+.data
+
+.text
+
+div $a0, %x, 7
+div $a1, %y, 7
+ 	
+.end_macro
+
 
 
 
