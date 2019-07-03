@@ -191,7 +191,8 @@ move $v0, $zero #caso não tenha parede
 beq $s0, 64, check_wall_end    #verifica se é comida
 beq $s0, 65, check_wall_end    #verifica se é a pílula
 beq $s0, 68, check_wall_end    #verifica se é a cereja
- 
+beq $s0, 67, check_wall_end    #verifica se é a pacman  
+  
 addi $v0, $v0, 1 #tem parede
   
 check_wall_end:

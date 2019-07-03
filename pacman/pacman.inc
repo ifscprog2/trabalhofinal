@@ -32,30 +32,42 @@ sw $ra,28($sp)
     la $a2, grid_1
     
     lw $t0, 4($s1)       # x mov_pacman
-    lw $t1, 4($s2)       # x pacman 
-    add $a0, $t0, $t1    # posicao x de pesquisa
+    lw $t1, 4($s2)       # x pacman pixel
+    div $t4, $t1, 7       # x pacman grid
+    mfhi $t6
+    add $a0, $t0, $t4    # posicao x de pesquisa
     lw $t2, 8($s1)       # y mov_pacman
-    lw $t3, 8($s2)       # y pacman 
-    add $a1, $t2, $t3    # posicao x de pesquisa
-    jal check_wall       # retorna $v0->1 se é parede
-    bnez $v0, mov_pacman_0  #if (parede=0)
+    lw $t3, 8($s2)       # y pacman pixel
+    div $t5, $t3, 7      # y pacman grid
+    mfhi $t7
+    add $a1, $t2, $t5    # posicao x de pesquisa
+    add $t7, $t6, $t7    # se zero está na posicao (0,0) sprite
+    bnez $t7, mov_pacman_0
+     jal check_wall       # retorna $v0->1 se é parede
+     bnez $v0, mov_pacman_0  #if (parede=0)
        sw $t0, 12($s2)  # guarda novo movimento x
        sw $t2, 16($s2)  # gurada novo movimento y  
     
 mov_pacman_0:       
     lw $t0, 4($s2)       # pos_x pacman
     lw $t1, 12($s2)      # mov_x pacman 
-    add $a0, $t0, $t1    # posicao x de pesquisa
+    div $t4, $t0, 7       # x pacman grid
+    mfhi $t6
+    add $a0, $t1, $t4    # posicao x de pesquisa
     lw $t2, 8($s2)       # pos_y pacman
     lw $t3, 16($s2)      # mov_y pacman 
-    add $a1, $t2, $t3    # posicao x de pesquisa
+    div $t5, $t2, 7      # y pacman grid
+    mfhi $t7
+    add $a1, $t3, $t5    # posicao x de pesquisa
+    add $t7, $t6, $t7    # se zero está na posicao (0,0) sprite
+    bnez $t7, mov_pacman_1
     jal check_wall       # retorna $v0->1 se é parede    
- 
     bnez $v0, movement_pacman_end  #if (parede=0)
+mov_pacman_1:
+       add $a0, $t1, $t0  # atualiza pos_x
        sw $a0, 4($s2)
+       add $a1, $t2, $t3 # atualiza pox_y
        sw $a1, 8($s2)
-       mul $a0, $a0, 7
-       mul $a1, $a1, 7
        li $a2, 3          #sprite pacman
        jal   draw_sprite
               
