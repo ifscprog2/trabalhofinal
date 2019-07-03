@@ -1,13 +1,16 @@
 .include "graphics.inc"
-.include "funcoes1.inc"
+.include "funcoes2.inc"
+.include "pacman.inc"
+.include "ghost.inc"
 .include "macros.inc"
 .include "interrupt.inc"
 
 
 .data
 
-animed_sprite(pacman,3,0,0,0,0,0,0,0) #struct animed
-moviment(mov_pacman,0,0,0)#struct leitura do movimento do pacman
+animed_sprite(pacman, 3, 0, 0, 0, 0, 0) #struct animed
+animed_sprite(ghost_1, 2, 0, 0, 0, 0, 0) #struct animed
+moviment(mov_pacman, 0 ,0 ,0)#struct leitura do movimento do pacman
 
 .text 
 .globl main
@@ -32,7 +35,7 @@ main_loop_1:
     
    
     jal movement_pacman
-	
+    jal movement_ghost	
 	
 	
 	

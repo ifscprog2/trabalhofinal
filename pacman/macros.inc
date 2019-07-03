@@ -1,18 +1,16 @@
 #--------------------------------------------#
 #struct animed sprite
 #--------------------------------------------#
-.macro animed_sprite (%name, %id, %pos_x, %pos_y, %mov_pos_x, %mov_pos_y, %mov_x, %mov_y, %inven)
+.macro animed_sprite (%name, %id, %pos_x, %pos_y, %mov_x, %mov_y, %inven)
 .data
 %name:
 .align 2
 	.word %id            # 0
-	.word %pos_x         # 4 posicao x atual
-	.word %pos_y         # 8 posicao y atual
-	.word %mov_pos_x     # 12 em movimento x possiveis 
-	.word %mov_pos_y     # 16 em movimento y possiveis
-	.word %mov_x         # 20 movimento atual x
-	.word %mov_y         # 24 movimento atual y
-        .word %inven         # 28 invencibilidade  0-> vencivel 
+	.word %pos_x         # 4 posicao x atual pixel
+	.word %pos_y         # 8 posicao y atual pixel
+	.word %mov_x         # 12 movimento atual x
+	.word %mov_y         # 16 movimento atual y
+        .word %inven         # 20 invencibilidade  0-> vencivel 
 .end_macro
 
 .macro moviment (%name, %valid, %x, %y)
