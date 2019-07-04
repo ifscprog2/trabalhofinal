@@ -108,8 +108,9 @@ draw_sprite_loop:
    div $t6, $t5, 7    # $t5 y  alcula posicao y
    mfhi $t7            # $t6 resto e posicao x
    add $a0, $t0, $t7  # x[]  
+   add $a0, $a0, X_OFFSET
    add $a1, $t1, $t6  # y[]
-	
+   add $a1, $a1, Y_OFFSET	
    jal set_pixel
    addi $t5, $t5, 1  # i++
    addi $t2, $t2, 1  # prite[id[++]]

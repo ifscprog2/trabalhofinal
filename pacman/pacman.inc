@@ -83,3 +83,7 @@ lw $ra, 28($sp)       #restaura valores
 addi $sp, $sp, 32     #destroi pilha
 jr   $ra
     
+
+
+
+
