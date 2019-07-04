@@ -12,10 +12,12 @@
   
 
 .data
+pontuacao: .word 0
+
 
 # 35x35 Pacman Arena - Sprites 7x7
 grid_1:
-.ascii "TTTTTTTTTTTTTTTTTTTTTTTTTUVWXYZ[]^_"
+.ascii "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT"
 .ascii "ENNNNNNGNNNGNNNGF@EGNNNGNNNGNNNNNNF"
 .ascii "IA@@@@@I@@@I@@@LK@JM@@@I@@@I@@@@@AI"
 .ascii "I@ONNP@I@Q@I@Q@I@@@I@Q@I@Q@I@ONNP@I"
@@ -66,7 +68,7 @@ colors: .word BLACK, BLUE, PURPLE, YELLOW
 
 .eqv SPRITE_SIZE 49
 sprites:
-#Comida (@) (0x40) (64)
+#Comida 0 (@) (0x40) (64)
 .byte 0,0,0,0,0,0,0
 .byte 0,0,0,0,0,0,0
 .byte 0,0,0,6,0,0,0
@@ -74,7 +76,7 @@ sprites:
 .byte 0,0,0,6,0,0,0
 .byte 0,0,0,0,0,0,0
 .byte 0,0,0,0,0,0,0
-#Invenc. (A)
+#Invenc. 1 (A)
 .byte 0,0,0,0,0,0,0
 .byte 0,0,0,1,0,0,0
 .byte 0,0,1,1,1,0,0
@@ -82,7 +84,7 @@ sprites:
 .byte 0,0,1,1,1,0,0
 .byte 0,0,0,1,0,0,0
 .byte 0,0,0,0,0,0,0
-#Inimigo (B)
+#Inimigo 2(B)
 .byte 0,0,0,0,0,0,0
 .byte 0,0,2,2,2,0,0
 .byte 0,2,0,2,0,2,0
@@ -90,7 +92,7 @@ sprites:
 .byte 0,2,2,2,2,2,0
 .byte 0,2,0,2,0,2,0
 .byte 0,0,0,0,0,0,0
-#PACMAN (C)
+#PACMAN 3 (C)
 .byte 0,0,0,0,0,0,0
 .byte 0,0,3,3,3,0,0
 .byte 0,3,3,3,3,3,0
@@ -98,7 +100,7 @@ sprites:
 .byte 0,3,3,3,3,3,0
 .byte 0,0,3,3,3,0,0
 .byte 0,0,0,0,0,0,0
-#Cereja (D)
+#Cereja 4 (D)
 .byte 0,0,0,0,0,0,0
 .byte 0,0,0,0,5,5,0
 .byte 0,0,0,5,5,0,0
@@ -234,13 +236,14 @@ sprites:
 .byte 0,0,0,0,0,0,0
 .byte 0,0,0,0,0,0,0
 .byte 0,0,0,0,0,0,0
-#0  (U)
+numbers:
+#0  21 (U)
 .byte 0,0,0,0,0,0,0
-.byte 0,0,0,0,0,0,0
-.byte 0,0,0,0,0,0,0
-.byte 0,0,0,0,0,0,0
-.byte 0,0,0,0,0,0,0
-.byte 0,0,0,0,0,0,0
+.byte 0,0,3,3,3,0,0
+.byte 0,0,3,0,3,0,0
+.byte 0,0,3,0,3,0,0
+.byte 0,0,3,0,3,0,0
+.byte 0,0,3,3,3,0,0
 .byte 0,0,0,0,0,0,0
 #1  (V)
 .byte 0,0,0,0,0,0,0
@@ -255,7 +258,7 @@ sprites:
 .byte 0,0,3,3,3,0,0
 .byte 0,0,0,0,3,0,0
 .byte 0,0,3,3,3,0,0
-.byte 0,0,0,0,0,0,0
+.byte 0,0,3,0,0,0,0
 .byte 0,0,3,3,3,0,0
 .byte 0,0,0,0,0,0,0
 #3  (X)
@@ -290,15 +293,7 @@ sprites:
 .byte 0,0,3,0,3,0,0
 .byte 0,0,3,3,3,0,0
 .byte 0,0,0,0,0,0,0
-#Preto  (\)
-.byte 0,0,0,0,0,0,0
-.byte 0,0,0,0,0,0,0
-.byte 0,0,0,0,0,0,0
-.byte 0,0,0,0,0,0,0
-.byte 0,0,0,0,0,0,0
-.byte 0,0,0,0,0,0,0
-.byte 0,0,0,0,0,0,0
-#7  (])
+#7  (\)
 .byte 0,0,0,0,0,0,0
 .byte 0,0,3,3,3,0,0
 .byte 0,0,0,0,3,0,0
@@ -306,7 +301,7 @@ sprites:
 .byte 0,0,0,0,3,0,0
 .byte 0,0,0,0,3,0,0
 .byte 0,0,0,0,0,0,0
-#8  (^)
+#8  ([)
 .byte 0,0,0,0,0,0,0
 .byte 0,0,3,3,3,0,0
 .byte 0,0,3,0,3,0,0
@@ -314,7 +309,7 @@ sprites:
 .byte 0,0,3,0,3,0,0
 .byte 0,0,3,3,3,0,0
 .byte 0,0,0,0,0,0,0
-#9  (_)
+#9  (^)
 .byte 0,0,0,0,0,0,0
 .byte 0,0,3,3,3,0,0
 .byte 0,0,3,0,3,0,0
@@ -322,3 +317,42 @@ sprites:
 .byte 0,0,0,0,3,0,0
 .byte 0,0,0,0,3,0,0
 .byte 0,0,0,0,0,0,0
+
+
+grid_pontuacao:
+.ascii "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT"
+.ascii "ENNNNNNGNNNGNNNGF@EGNNNGNNNGNNNNNNF"
+.ascii "IA@@@@@I@@@I@@@LK@JM@@@I@@@I@@@@@AI"
+.ascii "I@ONNP@I@Q@I@Q@I@@@I@Q@I@Q@I@ONNP@I"
+.ascii "I@@@@@@I@I@I@I@R@Q@R@I@I@I@I@@@@@@I"
+.ascii "LNNNNP@R@I@I@I@@@I@@@I@I@I@R@ONNNNM"
+.ascii "I@@@@@@@@I@R@LNNNSNNNM@R@I@@@@@@@@I"
+.ascii "I@ENNF@Q@I@D@I@D@I@D@I@D@I@Q@ENNF@I"
+.ascii "I@JNNK@I@LNGNM@I@I@I@LNGNM@I@JNNK@I"
+.ascii "I@@@@@@I@IDIDI@I@I@I@IDIDI@I@@@@@@I"
+.ascii "I@ONNNNM@I@I@I@I@I@I@I@I@I@LNNNNP@I"
+.ascii "I@@@@@@I@I@R@R@I@R@I@R@R@I@I@@@@@@I"
+.ascii "I@ENNF@I@I@@@@@I@@@I@@@@@I@I@ENNF@I"
+.ascii "I@JNNK@I@JP@Q@OHP@OHP@Q@OK@I@JNNK@I"
+.ascii "I@@@@@@I@@@@I@@@@@@@@@I@@@@I@@@@@@I"
+.ascii "LNNNNP@I@EF@R@ENP@ONF@R@EF@I@ONNNNM"
+.ascii "IA@@@@@I@JK@@@IB@@@BI@@@JK@I@@@@@AI"
+.ascii "JNNNNNNK@@@@Q@IABABAI@Q@@@@JNNNNNNK"
+.ascii "@@@@@@@@@OP@I@IB@@@BI@I@OP@@@@@@@@@"
+.ascii "ENNNNNNF@@@@R@JNNNNNK@R@@@@ENNNNNNF"
+.ascii "IA@@@@@I@EF@@@@@@@@@@@@@EF@I@@@@@AI"
+.ascii "LNNNNP@I@JK@ENNNPCONNNF@JK@I@ONNNNM"
+.ascii "I@@@@@@I@@@@I@@@@@@@@@I@@@@I@@@@@@I"
+.ascii "I@ENNF@I@EP@R@OGP@OGP@R@OF@I@ENNF@I"
+.ascii "I@JNNK@I@I@@@@@I@@@I@@@@@I@I@JNNK@I"
+.ascii "I@@@@@@I@I@Q@Q@I@Q@I@Q@Q@I@I@@@@@@I"
+.ascii "I@ONNNNM@I@I@I@I@I@I@I@I@I@LNNNNP@I"
+.ascii "I@@@@@@I@IDIDI@I@I@I@IDIDI@I@@@@@@I"
+.ascii "I@ENNF@I@LNHNM@R@I@R@LNHNM@I@ENNF@I"
+.ascii "I@JNNK@R@I@D@I@D@I@D@I@D@I@R@JNNK@I"
+.ascii "I@@@@@@@@I@Q@LNNNSNNNM@Q@I@@@@@@@@I"
+.ascii "LNNNNP@Q@I@I@I@@@I@@@I@I@I@Q@ONNNNM"
+.ascii "I@@@@@@I@I@I@I@Q@R@Q@I@I@I@I@@@@@@I"
+.ascii "I@ONNP@I@R@I@R@I@@@I@R@I@R@I@ONNP@I"
+.ascii "IA@@@@@I@@@I@@@LF@EM@@@I@@@I@@@@@AI"
+.ascii "JNNNNNNHNNNHNNNHK@JHNNNHNNNHNNNNNNK"

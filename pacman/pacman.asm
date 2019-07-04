@@ -9,7 +9,7 @@
 .data
 
 animed_sprite(pacman, 3, 119, 147, 0, 0, 0) #struct animed
-animed_sprite(ghost_1, 2, 0, 0, 0, 0, 0) #struct animed
+animed_sprite(ghost_1, 2, 105, 126, 0, 0, 0) #struct animed
 moviment(mov_pacman, 0 ,0 ,0)#struct leitura do movimento do pacman
 moviment(mov_ghost,0 ,0 ,0)#struct leitura do movimento do pacman
 
@@ -25,19 +25,19 @@ main:
     li $a0, GRID_1_COLS  
     li $a1, GRID_1_ROWS 
     la $a2, grid_1
-     jal draw_grid  
+    jal draw_grid  
 
 
 main_loop_1:
     
    
-    jal movement_pacman
-    jal movement_ghost	
+    jal movement_pacman  #pacman.inc
+    jal movement_ghost	 #ghost.inc 
+    jal print_score      #pacman.inc		
 	
+    	
 	
-	
-	
-    macro_delay(40)   #delay 50ms
+    macro_delay(20)   #delay 50ms
     j main_loop_1
     
 main_end:      

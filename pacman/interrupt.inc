@@ -115,8 +115,8 @@ jr $t0
   
         la $t0, mov_pacman #carrega endereço do mov_pacman(struct)
   	lw $a0, 0xffff0004 #carrega dado do teclado
-  	li $v0, 1
-  	syscall
+  	#li $v0, 1         #debud
+  	#syscall           #debug
   	
   	beq $a0, 119, case_0_subir #w minusculo
         beq $a0, 87, case_0_subir #W maiusculo 
@@ -126,9 +126,9 @@ jr $t0
         beq $a0, 65, case_0_esquerda #A maiusculo 
         beq $a0, 100, case_0_direita #d minusculo
         beq $a0, 68, case_0_direita #D maiusculo            			        			
-  	la $a0, print0
-  	li $v0, 4   #escreve na tela
-  	syscall
+  	#la $a0, print0      #debug    
+  	#li $v0, 4   #escreve na tela  #debug
+  	#syscall             #debug
 
   	j case_0_end
   	  	
