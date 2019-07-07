@@ -13,6 +13,7 @@
 
 .data
 pontuacao: .word 0
+pause: .word 0
 
 
 # 35x35 Pacman Arena - Sprites 7x7

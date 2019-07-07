@@ -205,4 +205,26 @@ lw $ra, 28($sp)
 addi $sp, $sp, 32     #destroi pilha
 jr   $ra
     
+
+
+
+#--------------------------------------------#
+# reset
+# coid reset();
+#--------------------------------------------#
+reset:
+ la $t0, pacman
+ li $t1, 119
+ sw $t1, 4($t0)  # pos_x
+ li $t1, 147
+ sw $t1, 8($t0)  # pos_y
+ sw $zero, 12($t0) # mov_x
+ sw $zero, 16($t0) # mov_y
+ la $t0, pontuacao
+ sw $zero, 0($t0)  #pontuacao
+ la $t0, mov_pacman
+ sw $zero, 0($t0)  #        
+
     
+jr   $ra        
+                

@@ -126,6 +126,7 @@ jr $t0
         beq $a0, 65, case_0_esquerda #A maiusculo 
         beq $a0, 100, case_0_direita #d minusculo
         beq $a0, 68, case_0_direita #D maiusculo            			        			
+  	beq $a0, 32, case_0_space  # barra espaco
   	#la $a0, print0      #debug    
   	#li $v0, 4   #escreve na tela  #debug
   	#syscall             #debug
@@ -161,6 +162,13 @@ jr $t0
     sw $t1, 4($t0)    #x
     sw $zero, 8($t0)  #y
   j case_0_end
+    	  	  	
+  case_0_space:    	  	  	
+   la $t1, pause
+   lw $t2, 0($t1)
+   not $t2,$t2
+   sw $t2, 0($t1)    	  	  	
+     	  	
     	  	  	
   case_0_end:
     mfc0 $k0, $14 	# $k0 = EPC  

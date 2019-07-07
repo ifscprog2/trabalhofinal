@@ -19,6 +19,8 @@ main:
      #configuracoes
      li $t0, 2
      sw $t0, 0xffff0000   # habilita interrupção pelo teclado. 
+     la $t0, pause
+     sw $zero, 0($t0)     # garante fora de pause durante a inicialização  
   
      
     # CHAMA DRAW GRID (imprime grid)
@@ -35,10 +37,21 @@ main_loop_1:
     jal movement_ghost	 #ghost.inc 
     jal print_score      #pacman.inc		
 	
-    	
-	
-    macro_delay(20)   #delay 50ms
-    j main_loop_1
+       
+    macro_delay(20)      #delay 20ms
+    
+    la $t0, pause
+    lw $t1, 0($t0)
+main_pause:             # pause = 1 pausa jogo
+    beqz $t1, main_loop_1
+    lw $t3, 0xffff0004  #carrega dado do teclado
+    beq $t3, 10 , main_pause_reset  # se enter em pause reinicia jogo 
+    lw $t1, 0($t0)
+    j main_pause
+    
+main_pause_reset:
+  jal reset
+  j main       
     
 main_end:      
 jr $ra
