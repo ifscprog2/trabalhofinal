@@ -34,7 +34,7 @@ main_loop_1:
     
    
     jal movement_pacman  #pacman.inc
-    jal movement_ghost	 #ghost.inc 
+#    jal movement_ghost	 #ghost.inc 
     jal print_score      #pacman.inc		
 	
        
